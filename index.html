@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yi-Lei Li</title>
+<meta name="description" content="Yi-Lei (Ray) Li — M.S. Computer Science, University of Delaware. Backend services and data work: a banking transactions API, a multi-market backtesting engine, an ETL pipeline, and credit risk modelling.">
+<meta property="og:title" content="Yi-Lei Li">
+<meta property="og:description" content="I build systems that are supposed to catch their own mistakes.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<a class="skip" href="#work">Skip to work</a>
+
+<header class="topbar">
+  <div class="wrap topbar__inner">
+    <a class="wordmark" href="#top">Yi-Lei Li</a>
+    <nav aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#failures">What didn't work</a>
+      <a href="#dashboard">Dashboard</a>
+      <a href="#background">Background</a>
+      <a href="mailto:ray1998514@gmail.com">Email</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div>
+        <h1>I build systems that are supposed to catch their own mistakes.</h1>
+        <p class="lede">
+          <strong>M.S. in Computer Science, University of Delaware, May 2026.</strong>
+          I work on backend services and data pipelines where being quietly wrong is
+          the expensive failure — a banking API where a transfer either completes on
+          both sides or not at all, and a backtesting engine whose main job is to throw
+          out strategies that only look good in hindsight.
+        </p>
+        <div class="actions">
+          <a class="btn btn--primary" href="resume/Yi-Lei_Li_Resume_SWE.pdf">Résumé for software roles</a>
+          <a class="btn" href="resume/Yi-Lei_Li_Resume_Data.pdf">Résumé for data roles</a>
+        </div>
+      </div>
+
+      <figure class="evidence">
+        <svg viewBox="-4 0 772 216" role="img" aria-labelledby="chart-title chart-desc">
+          <title id="chart-title">Walk-forward out-of-sample equity curve, 2018 to 2026</title>
+          <desc id="chart-desc">A 50/50 QQQ and Bitcoin volatility-targeted momentum portfolio grows from 1.0 to about 2.0 over eight years, measured only on data the parameter search never saw.</desc>
+          <line class="chart-tick" x1="82.33" y1="0" x2="82.33" y2="210.0"></line>
+          <text class="chart-label" x="82.33" y="224.0" text-anchor="middle">2019</text>
+          <line class="chart-tick" x1="171.0" y1="0" x2="171.0" y2="210.0"></line>
+          <text class="chart-label" x="171.0" y="224.0" text-anchor="middle">2020</text>
+          <line class="chart-tick" x1="259.67" y1="0" x2="259.67" y2="210.0"></line>
+          <text class="chart-label" x="259.67" y="224.0" text-anchor="middle">2021</text>
+          <line class="chart-tick" x1="348.33" y1="0" x2="348.33" y2="210.0"></line>
+          <text class="chart-label" x="348.33" y="224.0" text-anchor="middle">2022</text>
+          <line class="chart-tick" x1="437.0" y1="0" x2="437.0" y2="210.0"></line>
+          <text class="chart-label" x="437.0" y="224.0" text-anchor="middle">2023</text>
+          <line class="chart-tick" x1="522.5" y1="0" x2="522.5" y2="210.0"></line>
+          <text class="chart-label" x="522.5" y="224.0" text-anchor="middle">2024</text>
+          <line class="chart-tick" x1="611.17" y1="0" x2="611.17" y2="210.0"></line>
+          <text class="chart-label" x="611.17" y="224.0" text-anchor="middle">2025</text>
+          <line class="chart-tick" x1="699.83" y1="0" x2="699.83" y2="210.0"></line>
+          <text class="chart-label" x="699.83" y="224.0" text-anchor="middle">2026</text>
+          <line class="chart-base" x1="0" y1="172.88" x2="760" y2="172.88"></line>
+          <text class="chart-label" x="2" y="166.88">1.0x break-even</text>
+          <path class="chart-area" d="M 0.0 173.56 L 3.17 176.49 L 6.33 174.61 L 9.5 172.93 L 12.67 175.48 L 15.83 179.3 L 19.0 179.37 L 22.17 179.46 L 25.33 179.21 L 28.5 180.31 L 31.67 177.74 L 34.83 179.52 L 38.0 176.96 L 41.17 176.17 L 44.33 176.01 L 47.5 176.14 L 50.67 171.84 L 53.83 174.26 L 57.0 173.04 L 60.17 174.64 L 63.33 181.98 L 66.5 182.05 L 69.67 183.41 L 72.83 183.41 L 76.0 183.41 L 79.17 183.41 L 82.33 183.41 L 85.5 183.41 L 88.67 184.0 L 91.83 183.56 L 95.0 182.53 L 98.17 181.47 L 101.33 179.62 L 104.5 166.62 L 107.67 163.09 L 110.83 162.22 L 114.0 160.35 L 117.17 165.37 L 120.33 163.71 L 123.5 155.12 L 126.67 151.07 L 129.83 151.13 L 133.0 154.9 L 136.17 158.19 L 139.33 157.6 L 142.5 155.5 L 145.67 158.35 L 148.83 158.8 L 152.0 158.17 L 155.17 156.18 L 158.33 155.06 L 161.5 153.05 L 164.67 153.51 L 167.83 150.33 L 171.0 148.1 L 174.17 144.97 L 177.33 142.39 L 180.5 135.33 L 183.67 148.0 L 186.83 153.89 L 190.0 153.89 L 193.17 153.89 L 196.33 153.89 L 199.5 153.78 L 202.67 151.18 L 205.83 149.3 L 209.0 149.11 L 212.17 149.57 L 215.33 145.11 L 218.5 144.11 L 221.67 132.08 L 224.83 130.59 L 228.0 128.19 L 231.17 135.32 L 234.33 135.78 L 237.5 134.38 L 240.67 130.73 L 243.83 130.68 L 247.0 120.28 L 250.17 115.29 L 253.33 117.83 L 256.5 111.21 L 259.67 100.05 L 262.83 101.27 L 266.0 97.77 L 269.17 91.59 L 272.33 97.15 L 275.5 98.06 L 278.67 99.05 L 281.83 95.68 L 285.0 95.64 L 288.17 96.44 L 291.33 99.72 L 294.5 97.07 L 297.67 94.94 L 300.83 91.74 L 304.0 89.29 L 307.17 87.27 L 310.33 82.35 L 313.5 81.2 L 316.67 73.97 L 319.83 77.57 L 323.0 88.22 L 326.17 86.35 L 329.33 80.93 L 332.5 74.17 L 335.67 76.78 L 338.83 84.63 L 342.0 86.18 L 345.17 83.66 L 348.33 87.25 L 351.5 88.99 L 354.67 88.99 L 357.83 88.99 L 361.0 88.99 L 364.17 90.38 L 367.33 88.41 L 370.5 92.12 L 373.67 92.2 L 376.83 97.87 L 380.0 97.87 L 383.17 97.87 L 386.33 97.87 L 389.5 97.87 L 392.67 97.87 L 395.83 97.87 L 399.0 97.87 L 402.17 103.34 L 405.33 105.93 L 408.5 107.66 L 411.67 107.66 L 414.83 107.66 L 418.0 107.32 L 421.17 109.73 L 424.33 115.6 L 427.5 115.6 L 430.67 115.6 L 433.83 115.6 L 437.0 110.77 L 440.17 103.89 L 443.33 102.21 L 446.5 102.23 L 449.67 105.33 L 452.83 100.78 L 456.0 97.2 L 459.17 95.75 L 462.33 96.85 L 465.5 96.62 L 468.67 96.46 L 471.83 90.97 L 475.0 87.82 L 478.17 83.46 L 481.33 80.4 L 484.5 82.46 L 487.67 85.8 L 490.83 96.66 L 494.0 95.43 L 497.17 96.58 L 500.33 98.66 L 503.5 97.82 L 506.67 91.18 L 509.83 88.57 L 513.0 85.29 L 516.17 77.87 L 519.33 72.29 L 522.5 73.24 L 525.67 72.01 L 528.83 66.69 L 532.0 59.23 L 535.17 54.09 L 538.33 41.77 L 541.5 40.94 L 544.67 44.06 L 547.83 49.83 L 551.0 51.26 L 554.17 46.23 L 557.33 38.3 L 560.5 36.7 L 563.67 36.61 L 566.83 34.08 L 570.0 41.73 L 573.17 46.53 L 576.33 48.77 L 579.5 47.52 L 582.67 50.24 L 585.83 46.48 L 589.0 45.72 L 592.17 44.79 L 595.33 41.02 L 598.5 28.95 L 601.67 27.36 L 604.83 22.61 L 608.0 25.21 L 611.17 20.45 L 614.33 15.72 L 617.5 15.75 L 620.67 13.74 L 623.83 28.88 L 627.0 40.04 L 630.17 40.04 L 633.33 40.04 L 636.5 40.04 L 639.67 39.35 L 642.83 36.66 L 646.0 39.8 L 649.17 38.63 L 652.33 34.11 L 655.5 26.25 L 658.67 22.79 L 661.83 29.26 L 665.0 24.78 L 668.17 29.24 L 671.33 21.62 L 674.5 25.08 L 677.67 12.0 L 680.83 23.74 L 684.0 23.64 L 687.17 27.69 L 690.33 25.92 L 693.5 24.94 L 696.67 25.06 L 699.83 25.74 L 703.0 26.01 L 706.17 29.86 L 709.33 31.01 L 712.5 31.44 L 715.67 32.09 L 718.83 32.09 L 722.0 31.82 L 725.17 27.29 L 728.33 21.24 L 731.5 20.89 L 734.67 13.47 L 737.83 16.19 L 741.0 18.15 L 744.17 19.28 L 747.33 21.98 L 750.5 18.42 L 753.67 18.37 L 756.83 20.4 L 760.0 19.15 L 760.0 210.0 L 0 210.0 Z"></path>
+          <path class="chart-line" d="M 0.0 173.56 L 3.17 176.49 L 6.33 174.61 L 9.5 172.93 L 12.67 175.48 L 15.83 179.3 L 19.0 179.37 L 22.17 179.46 L 25.33 179.21 L 28.5 180.31 L 31.67 177.74 L 34.83 179.52 L 38.0 176.96 L 41.17 176.17 L 44.33 176.01 L 47.5 176.14 L 50.67 171.84 L 53.83 174.26 L 57.0 173.04 L 60.17 174.64 L 63.33 181.98 L 66.5 182.05 L 69.67 183.41 L 72.83 183.41 L 76.0 183.41 L 79.17 183.41 L 82.33 183.41 L 85.5 183.41 L 88.67 184.0 L 91.83 183.56 L 95.0 182.53 L 98.17 181.47 L 101.33 179.62 L 104.5 166.62 L 107.67 163.09 L 110.83 162.22 L 114.0 160.35 L 117.17 165.37 L 120.33 163.71 L 123.5 155.12 L 126.67 151.07 L 129.83 151.13 L 133.0 154.9 L 136.17 158.19 L 139.33 157.6 L 142.5 155.5 L 145.67 158.35 L 148.83 158.8 L 152.0 158.17 L 155.17 156.18 L 158.33 155.06 L 161.5 153.05 L 164.67 153.51 L 167.83 150.33 L 171.0 148.1 L 174.17 144.97 L 177.33 142.39 L 180.5 135.33 L 183.67 148.0 L 186.83 153.89 L 190.0 153.89 L 193.17 153.89 L 196.33 153.89 L 199.5 153.78 L 202.67 151.18 L 205.83 149.3 L 209.0 149.11 L 212.17 149.57 L 215.33 145.11 L 218.5 144.11 L 221.67 132.08 L 224.83 130.59 L 228.0 128.19 L 231.17 135.32 L 234.33 135.78 L 237.5 134.38 L 240.67 130.73 L 243.83 130.68 L 247.0 120.28 L 250.17 115.29 L 253.33 117.83 L 256.5 111.21 L 259.67 100.05 L 262.83 101.27 L 266.0 97.77 L 269.17 91.59 L 272.33 97.15 L 275.5 98.06 L 278.67 99.05 L 281.83 95.68 L 285.0 95.64 L 288.17 96.44 L 291.33 99.72 L 294.5 97.07 L 297.67 94.94 L 300.83 91.74 L 304.0 89.29 L 307.17 87.27 L 310.33 82.35 L 313.5 81.2 L 316.67 73.97 L 319.83 77.57 L 323.0 88.22 L 326.17 86.35 L 329.33 80.93 L 332.5 74.17 L 335.67 76.78 L 338.83 84.63 L 342.0 86.18 L 345.17 83.66 L 348.33 87.25 L 351.5 88.99 L 354.67 88.99 L 357.83 88.99 L 361.0 88.99 L 364.17 90.38 L 367.33 88.41 L 370.5 92.12 L 373.67 92.2 L 376.83 97.87 L 380.0 97.87 L 383.17 97.87 L 386.33 97.87 L 389.5 97.87 L 392.67 97.87 L 395.83 97.87 L 399.0 97.87 L 402.17 103.34 L 405.33 105.93 L 408.5 107.66 L 411.67 107.66 L 414.83 107.66 L 418.0 107.32 L 421.17 109.73 L 424.33 115.6 L 427.5 115.6 L 430.67 115.6 L 433.83 115.6 L 437.0 110.77 L 440.17 103.89 L 443.33 102.21 L 446.5 102.23 L 449.67 105.33 L 452.83 100.78 L 456.0 97.2 L 459.17 95.75 L 462.33 96.85 L 465.5 96.62 L 468.67 96.46 L 471.83 90.97 L 475.0 87.82 L 478.17 83.46 L 481.33 80.4 L 484.5 82.46 L 487.67 85.8 L 490.83 96.66 L 494.0 95.43 L 497.17 96.58 L 500.33 98.66 L 503.5 97.82 L 506.67 91.18 L 509.83 88.57 L 513.0 85.29 L 516.17 77.87 L 519.33 72.29 L 522.5 73.24 L 525.67 72.01 L 528.83 66.69 L 532.0 59.23 L 535.17 54.09 L 538.33 41.77 L 541.5 40.94 L 544.67 44.06 L 547.83 49.83 L 551.0 51.26 L 554.17 46.23 L 557.33 38.3 L 560.5 36.7 L 563.67 36.61 L 566.83 34.08 L 570.0 41.73 L 573.17 46.53 L 576.33 48.77 L 579.5 47.52 L 582.67 50.24 L 585.83 46.48 L 589.0 45.72 L 592.17 44.79 L 595.33 41.02 L 598.5 28.95 L 601.67 27.36 L 604.83 22.61 L 608.0 25.21 L 611.17 20.45 L 614.33 15.72 L 617.5 15.75 L 620.67 13.74 L 623.83 28.88 L 627.0 40.04 L 630.17 40.04 L 633.33 40.04 L 636.5 40.04 L 639.67 39.35 L 642.83 36.66 L 646.0 39.8 L 649.17 38.63 L 652.33 34.11 L 655.5 26.25 L 658.67 22.79 L 661.83 29.26 L 665.0 24.78 L 668.17 29.24 L 671.33 21.62 L 674.5 25.08 L 677.67 12.0 L 680.83 23.74 L 684.0 23.64 L 687.17 27.69 L 690.33 25.92 L 693.5 24.94 L 696.67 25.06 L 699.83 25.74 L 703.0 26.01 L 706.17 29.86 L 709.33 31.01 L 712.5 31.44 L 715.67 32.09 L 718.83 32.09 L 722.0 31.82 L 725.17 27.29 L 728.33 21.24 L 731.5 20.89 L 734.67 13.47 L 737.83 16.19 L 741.0 18.15 L 744.17 19.28 L 747.33 21.98 L 750.5 18.42 L 753.67 18.37 L 756.83 20.4 L 760.0 19.15"></path>
+        </svg>
+        <figcaption>
+          Walk-forward out-of-sample equity, 2018&ndash;2026. Half QQQ, half Bitcoin,
+          each leg sized by target volatility, trading only on parameters fitted to
+          earlier data and charged <span class="num">0.1%</span> fees plus
+          <span class="num">0.05%</span> slippage. Sharpe <span class="num">1.10</span>,
+          worst drawdown <span class="num">&minus;16.8%</span>.
+          Recomputed 3 September 2026; in July the same code reported
+          <span class="num">1.29</span>. New data moves the number — that is what
+          out-of-sample means.
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="wrap">
+      <h2>Four things I have built</h2>
+      <p class="section__intro">
+        All the code is public. The numbers are measured on held-out data, not estimated.
+      </p>
+
+      <div class="projects">
+
+        <article class="project">
+          <div class="project__id">
+            <h3>quantlab</h3>
+            <p class="project__stack">Python, pandas, NumPy</p>
+            <p class="project__links"><a href="https://github.com/Lego514/quantlab">Source</a></p>
+          </div>
+          <div class="project__body">
+            <p>
+              A backtesting and research engine for equities, crypto, and prediction
+              markets. Every signal fills on the <em>next</em> bar, so a strategy cannot
+              trade on information it would not have had at the time. Fees and slippage
+              are charged on turnover, and every result is scored against simply holding
+              the asset — a strategy that cannot beat holding is not a strategy.
+            </p>
+            <p>
+              Eight strategies sit behind one interface, and a registry discovers new ones
+              automatically, so adding a strategy requires no change to the engine.
+              Anchored walk-forward validation reports in-sample against out-of-sample
+              Sharpe for each fold, which is the quickest way to see that a parameter set
+              was fitted rather than found.
+            </p>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project__id">
+            <h3>Banking Transactions API</h3>
+            <p class="project__stack">Java 21, Spring Boot 3, PostgreSQL</p>
+            <p class="project__links"><a href="https://github.com/Lego514/banking-transactions-api">Source</a></p>
+          </div>
+          <div class="project__body">
+            <p>
+              A core banking service: accounts, deposits and withdrawals that reject
+              overdrafts, and transfers that either commit on both legs or roll back
+              entirely.
+            </p>
+            <p>
+              Concurrent transfers take row locks in ascending account-id order, which
+              rules out both double-spend and deadlock. Every balance movement writes an
+              immutable ledger row carrying the resulting balance.
+              <span class="num">19</span> JUnit and MockMvc tests cover the service rules
+              and the HTTP error contract, and run in GitHub Actions on every push.
+            </p>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project__id">
+            <h3>Job-Opening Monitor</h3>
+            <p class="project__stack">Node.js, TypeScript, Supabase</p>
+            <p class="project__links"><a href="https://github.com/Lego514/job-opening-monitor">Source</a></p>
+          </div>
+          <div class="project__body">
+            <p>
+              A scheduled pipeline that reads around <span class="num">5,000</span>
+              postings per run from three unrelated hiring APIs — Workday, Greenhouse,
+              and Lever — and normalizes them behind one adapter layer. Fetches run with
+              bounded concurrency and no runtime dependencies.
+            </p>
+            <p>
+              A Postgres state table makes re-runs idempotent, so nothing ever alerts
+              twice. It runs on a GitHub Actions schedule and sends matches to Telegram
+              and email. <span class="num">32</span> Vitest tests cover the matching and
+              classification logic.
+            </p>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project__id">
+            <h3>Credit Card Default Risk</h3>
+            <p class="project__stack">Python, SQL, XGBoost, SHAP, Tableau</p>
+            <p class="project__links">
+              <a href="https://github.com/Lego514/credit-card-default-risk">Source</a>
+              <a href="#dashboard">Dashboard</a>
+            </p>
+          </div>
+          <div class="project__body">
+            <p>
+              Portfolio risk analysis across <span class="num">30,000</span> credit card
+              customers. Five SQL analyses using window functions and CTEs, then logistic
+              regression against XGBoost, reaching <span class="num">0.777</span> AUC on
+              a held-out set, with SHAP attributing each prediction to its features.
+              The riskiest decile contains <span class="num">31%</span> of all defaults,
+              a <span class="num">3.1x</span> lift over the base rate.
+            </p>
+            <p>
+              A grounded language-model layer drafts the weekly risk memo from the query
+              output rather than from recall, so every sentence traces back to a number
+              in the data.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section failures" id="failures">
+    <div class="wrap">
+      <h2>What didn't work</h2>
+      <p class="section__intro">
+        I went looking for a strategy returning 50% a year. Three of the four routes I
+        tried died the moment they met data they had not been fitted on. Keeping that
+        record is more useful than deleting it.
+      </p>
+
+      <div class="ftable-scroll">
+        <table class="ftable">
+          <thead>
+            <tr>
+              <th scope="col">Route</th>
+              <th scope="col">Fitted on past data</th>
+              <th scope="col">Held-out result</th>
+              <th scope="col">Verdict</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="t-path">Weekly altcoin rotation</td>
+              <td><span class="num">77&ndash;132%</span> a year</td>
+              <td><span class="num">&minus;3%</span> a year from 2024</td>
+              <td class="verdict verdict--dead">Dead</td>
+            </tr>
+            <tr>
+              <td class="t-path">One-hour Donchian breakout</td>
+              <td>Sharpe <span class="num">4.36</span></td>
+              <td>Sharpe <span class="num">&minus;0.89</span></td>
+              <td class="verdict verdict--dead">Dead</td>
+            </tr>
+            <tr>
+              <td class="t-path">4x leverage on the survivor</td>
+              <td>&mdash;</td>
+              <td><span class="num">26.8%</span> return at <span class="num">&minus;63%</span> drawdown</td>
+              <td class="verdict verdict--dead">Dead</td>
+            </tr>
+            <tr class="row--kept">
+              <td class="t-path">Volatility-targeted momentum</td>
+              <td>&mdash;</td>
+              <td>Sharpe <span class="num">1.10</span> at <span class="num">&minus;16.8%</span> drawdown</td>
+              <td class="verdict verdict--kept">Kept</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="lesson">
+        <strong>The honest way to raise returns is not a cleverer signal.</strong>
+        It is either accepting the roughly 1-to-1.5 return-to-drawdown arithmetic of
+        trend following, or finding a structural mispricing and then being strict about
+        whether the sample supports the claim. A study of Polymarket favourites looked
+        promising at sixteen wins from sixteen, but the 95% lower bound on that record is
+        about 81%, which is not yet above the average entry price. It needs roughly a
+        hundred samples before it means anything, so it stays unproven rather than
+        becoming a headline.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="dashboard">
+    <div class="wrap">
+      <h2>Credit risk, for someone who has to act on it</h2>
+      <p class="section__intro">
+        The same 30,000 customers, built for a portfolio manager rather than a reader:
+        utilization deciles, risk tiers, and the three figures worth checking first.
+      </p>
+      <div class="viz-frame">
+        <iframe
+          title="Credit card default risk dashboard, 30,000 customers"
+          src="https://public.tableau.com/views/credit_card_dashboard_17840541754490/CreditCardDefaultRisk30000CustomersUCITaiwan2005?:showVizHome=no&amp;:embed=true"
+          loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="background">
+    <div class="wrap">
+      <h2>Background</h2>
+      <div class="bg-grid">
+
+        <div>
+          <h3 class="col-head">Education</h3>
+          <div class="entry">
+            <h3>University of Delaware</h3>
+            <p class="when">Newark, Delaware &nbsp; May 2026</p>
+            <p>M.S. Computer Science. GPA <span class="num">3.66</span> / 4.0.</p>
+          </div>
+          <div class="entry">
+            <h3>National Kaohsiung University of Science and Technology</h3>
+            <p class="when">Kaohsiung, Taiwan &nbsp; 2020</p>
+            <p>B.S. Electrical Engineering.</p>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="col-head">Experience</h3>
+          <div class="entry">
+            <h3>Cathay Financial Holdings</h3>
+            <p class="when">Taipei, Taiwan &nbsp; July to November 2023</p>
+            <p>
+              Back-end software engineering intern. Built a CRUD service in Java and SQL
+              on an Agile team, and traced the firm's transaction-processing flow end to
+              end: balance checks before a transfer, and concurrency control that
+              serializes transactions per account.
+            </p>
+          </div>
+          <div class="entry">
+            <h3>Chang Gung University</h3>
+            <p class="when">Taoyuan, Taiwan &nbsp; 2021 to 2022</p>
+            <p>
+              Graduate research assistant working on neural radiance fields for
+              reconstructing 3D scenes from multi-view images. Earlier, as an
+              undergraduate assistant, a full-stack IoT sensor dashboard over REST and
+              WebSocket.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot__grid">
+    <div>
+      <p class="contact-line"><a href="mailto:ray1998514@gmail.com">ray1998514@gmail.com</a></p>
+      <p class="meta">
+        Based in Newark, Delaware, and open to roles on the East Coast.
+        Authorized to work in the United States on F-1 OPT, and eligible for the
+        24-month STEM extension.
+      </p>
+    </div>
+    <p class="links">
+      <a href="https://github.com/Lego514">GitHub</a>
+      <a href="https://www.linkedin.com/in/legoli/">LinkedIn</a>
+      <a href="https://public.tableau.com/app/profile/lego.li/">Tableau</a>
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
