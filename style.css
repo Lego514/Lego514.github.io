@@ -120,7 +120,7 @@ a:hover { text-decoration-thickness: 2px; }
 
 @media (prefers-reduced-motion: no-preference) {
   .chart-line {
-    stroke-dasharray: 1153; stroke-dashoffset: 1153;
+    stroke-dasharray: 1091; stroke-dashoffset: 1091;
     animation: draw 1.9s cubic-bezier(.33,.1,.25,1) 0.25s forwards;
   }
   .chart-area { opacity: 0; animation: wash 1s ease 1.6s forwards; }
