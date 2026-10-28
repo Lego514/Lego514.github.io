@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yi-Lei Li</title>
-<meta name="description" content="Yi-Lei (Ray) Li — M.S. Computer Science, University of Delaware. Backend services and data work: a banking transactions API, a multi-market backtesting engine, an ETL pipeline, and credit risk modelling.">
+<meta name="description" content="Yi-Lei (Ray) Li — M.S. Computer Science, University of Delaware. Backend services and data work: a banking transactions API with SQL ledger reconciliation, a multi-market backtesting engine, an ETL pipeline, credit risk modelling, and an offline-first interview-prep web app.">
 <meta property="og:title" content="Yi-Lei Li">
 <meta property="og:description" content="I build systems that are supposed to catch their own mistakes.">
 <meta property="og:type" content="website">
@@ -22,6 +22,7 @@
     <a class="wordmark" href="#top">Yi-Lei Li</a>
     <nav aria-label="Sections">
       <a href="#work">Work</a>
+      <a href="#more">More</a>
       <a href="#failures">What didn't work</a>
       <a href="#dashboard">Dashboard</a>
       <a href="#background">Background</a>
@@ -40,8 +41,9 @@
           <strong>M.S. in Computer Science, University of Delaware, May 2026.</strong>
           I work on backend services and data pipelines where being quietly wrong is
           the expensive failure — a banking API where a transfer either completes on
-          both sides or not at all, and a backtesting engine whose main job is to throw
-          out strategies that only look good in hindsight.
+          both sides or not at all and SQL checks prove the ledger still adds up, and a
+          backtesting engine whose main job is to throw out strategies that only look
+          good in hindsight.
         </p>
         <div class="actions">
           <a class="btn btn--primary" href="resume/Yi-Lei_Li_Resume_SWE.pdf">Résumé for software roles</a>
@@ -92,7 +94,7 @@
 
   <section class="section" id="work">
     <div class="wrap">
-      <h2>Four things I have built</h2>
+      <h2>Five things I have built</h2>
       <p class="section__intro">
         All the code is public. The numbers are measured on held-out data, not estimated.
       </p>
@@ -137,10 +139,18 @@
             </p>
             <p>
               Concurrent transfers take row locks in ascending account-id order, which
-              rules out both double-spend and deadlock. Every balance movement writes an
-              immutable ledger row carrying the resulting balance.
-              <span class="num">19</span> JUnit and MockMvc tests cover the service rules
-              and the HTTP error contract, and run in GitHub Actions on every push.
+              rules out both double-spend and deadlock; a CI test fires
+              <span class="num">100</span> opposite transfers at once against a real
+              PostgreSQL and checks that no money is created. An
+              <code>Idempotency-Key</code> header means a client that times out and
+              retries cannot pay twice.
+            </p>
+            <p>
+              Every balance movement writes an immutable ledger row, and five SQL
+              reconciliation queries — a window-function running total, paired transfer
+              legs, conservation of money — return the rows that break a rule. Each check
+              is proven by a test that corrupts one row and expects it to be caught.
+              <span class="num">32</span> tests run in GitHub Actions on every push.
             </p>
           </div>
         </article>
@@ -153,16 +163,19 @@
           </div>
           <div class="project__body">
             <p>
-              A scheduled pipeline that reads around <span class="num">5,000</span>
-              postings per run from three unrelated hiring APIs — Workday, Greenhouse,
-              and Lever — and normalizes them behind one adapter layer. Fetches run with
-              bounded concurrency and no runtime dependencies.
+              A scheduled pipeline that reads more than <span class="num">22,000</span>
+              postings per run from over <span class="num">110</span> sources — Workday,
+              Greenhouse, Lever, Ashby, SmartRecruiters and others — and normalizes them
+              behind one adapter layer, with bounded-concurrency fetches and one failing
+              source never taking down the run.
             </p>
             <p>
               A Postgres state table makes re-runs idempotent, so nothing ever alerts
-              twice. It runs on a GitHub Actions schedule and sends matches to Telegram
-              and email. <span class="num">32</span> Vitest tests cover the matching and
-              classification logic.
+              twice. Each run reports per-source health — p95 latency and whether a
+              failure was DNS, timeout, rate limit, HTTP, or parsing. A language-model
+              screening stage fails closed: when its API credit ran out, it held results
+              back instead of letting unscreened ones through. Over
+              <span class="num">340</span> Vitest tests.
             </p>
           </div>
         </article>
@@ -191,6 +204,104 @@
               in the data.
             </p>
           </div>
+        </article>
+
+        <article class="project">
+          <div class="project__id">
+            <h3>LeetCode Coach</h3>
+            <p class="project__stack">React, TypeScript, Hono, PostgreSQL</p>
+            <p class="project__links">
+              <a href="https://github.com/Lego514/leetcode-coach">Source</a>
+              <a href="https://leetcode-coach-f6q7.onrender.com">Live app</a>
+            </p>
+          </div>
+          <div class="project__body">
+            <p>
+              A deployed, offline-first web app for interview prep: it plans what to
+              practise each day, schedules reviews with the FSRS spaced-repetition
+              algorithm — checked against the reference implementation on hundreds of
+              random review histories — and runs timed mock interviews whose spoken
+              explanations Claude scores against a five-point rubric.
+            </p>
+            <p>
+              Every write lands in the browser's IndexedDB together with an outbox entry
+              in the same transaction, then syncs to PostgreSQL. The server assigns
+              versions from a sequence under a per-user advisory lock, so a sync cursor
+              never skips a change. Unit, API, and Playwright end-to-end tests gate every
+              deploy. The live app sleeps when idle and takes about a minute to wake.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="more">
+    <div class="wrap">
+      <h2>Smaller builds</h2>
+      <p class="section__intro">
+        Side projects outside data and backend work: networking labs, a whiteboard
+        component, and a graphics piece.
+      </p>
+
+      <div class="minis">
+
+        <article class="mini">
+          <h3>DSA Whiteboard</h3>
+          <p class="project__stack">React, TypeScript, Cloudflare Durable Objects</p>
+          <p>
+            A whiteboard for tracing algorithms by hand — arrays with pointers, trees,
+            graphs, heaps, DP tables — with step playback and live co-editing over
+            WebSockets. Split out of LeetCode Coach into its own package.
+          </p>
+          <p class="project__links">
+            <a href="https://github.com/Lego514/dsa-whiteboard">Source</a>
+            <a href="https://lego514.github.io/dsa-whiteboard/">Try it</a>
+          </p>
+        </article>
+
+        <article class="mini">
+          <h3>RoomFlow</h3>
+          <p class="project__stack">Linux network namespaces, tc, CAKE, Node.js</p>
+          <p>
+            Can a video call survive a roommate saturating the shared link? Measured on
+            real packets in CI: a plain FIFO queue pushed meeting p95 latency to
+            <span class="num">288</span> ms; CAKE held it at
+            <span class="num">43.9</span> ms with no meeting packet loss.
+          </p>
+          <p class="project__links">
+            <a href="https://github.com/Lego514/roomflow">Source</a>
+          </p>
+        </article>
+
+        <article class="mini">
+          <h3>NetOps Lab</h3>
+          <p class="project__stack">Python, FRRouting, nftables, Containerlab</p>
+          <p>
+            A small factory network defined in one YAML file: IP plan, OSPF and eBGP
+            configs, and firewall rules are generated from it, the compiled firewall is
+            checked against the policy before deploy, and CI verifies it on real
+            packets, including a link-failover drill.
+          </p>
+          <p class="project__links">
+            <a href="https://github.com/Lego514/netops-lab">Source</a>
+          </p>
+        </article>
+
+        <article class="mini">
+          <h3>Shallow Sea</h3>
+          <p class="project__stack">WebGL2, GLSL, no libraries</p>
+          <p>
+            An interactive tropical-shore wallpaper rendered live: refraction, caustics,
+            and depth-dependent wave physics on the GPU. Cold start went from about
+            <span class="num">42</span> s to <span class="num">2.3</span> s after
+            profiling shader compilation; CI compares rendered scenes pixel by pixel.
+          </p>
+          <p class="project__links">
+            <a href="https://github.com/Lego514/shallow-sea">Source</a>
+            <a href="https://lego514.github.io/shallow-sea/">Try it</a>
+          </p>
         </article>
 
       </div>

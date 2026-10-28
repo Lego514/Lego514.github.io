@@ -165,6 +165,19 @@ a:hover { text-decoration-thickness: 2px; }
 .project__body p { margin: 0; max-width: var(--measure); }
 .project__body p + p { margin-top: 0.7rem; }
 .project__body .num { color: var(--ink); }
+.project__body code { font-family: var(--f-mono); font-size: 0.86em; }
+
+/* ---------- smaller builds ---------- */
+
+.minis { margin-top: 2.4rem; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 2.5rem; }
+@media (min-width: 820px) { .minis { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+.mini { padding-block: 1.4rem; border-top: 1px solid var(--rule-faint); }
+.mini h3 { font-size: 1.05rem; }
+.mini p { margin: 0.5rem 0 0; font-size: 0.94rem; max-width: var(--measure); }
+.mini .project__stack { margin-top: 0.3rem; font-size: 0.79rem; }
+.mini .project__links { margin-top: 0.7rem; }
+.mini .num { color: var(--ink); }
 
 /* ---------- the failure table ---------- */
 
