@@ -161,6 +161,7 @@ a:hover { text-decoration-thickness: 2px; }
 }
 .project__links { margin-top: 0.7rem; display: flex; gap: 1rem; flex-wrap: wrap; }
 .project__links a { font-size: 0.87rem; }
+.link-note { flex-basis: 100%; margin-top: -0.6rem; font-size: 0.79rem; color: var(--ink-soft); }
 
 .project__body p { margin: 0; max-width: var(--measure); }
 .project__body p + p { margin-top: 0.7rem; }
