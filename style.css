@@ -168,6 +168,14 @@ a:hover { text-decoration-thickness: 2px; }
 .project__body .num { color: var(--ink); }
 .project__body code { font-family: var(--f-mono); font-size: 0.86em; }
 
+/* ---------- thumbnails: real screenshots, never decoration ---------- */
+
+.thumb { display: block; margin-top: 1rem; border: 1px solid var(--rule); background: #fff; line-height: 0; }
+.thumb img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; }
+.thumb:hover { border-color: var(--ink); }
+@media (max-width: 819px) { .project .thumb { max-width: 26rem; } }
+.mini .thumb { margin: 0 0 1rem; }
+
 /* ---------- smaller builds ---------- */
 
 .minis { margin-top: 2.4rem; display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 2.5rem; }
