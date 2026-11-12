@@ -1,10 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-type="software" data-radius="sharp" data-ground="painting" data-buttons="tonal" data-motion>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Yi-Lei Li</title>
-<meta name="description" content="Yi-Lei (Ray) Li — M.S. Computer Science, University of Delaware. Software engineering and data work: an offline-first interview-prep web app, a banking transactions API with SQL ledger reconciliation, a data pipeline over 110+ hiring sources, a multi-market backtesting engine, and credit risk modelling.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yi-Lei Li: software engineer in the New York City area</title>
+<meta name="description" content="Yi-Lei (Ray) Li, M.S. Computer Science, University of Delaware. Software engineering and data work: an offline-first interview-prep web app, a banking transactions API with SQL ledger reconciliation, a data pipeline over 110+ hiring sources, a backtesting engine, and credit risk modelling.">
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
 <meta property="og:title" content="Yi-Lei Li">
 <meta property="og:description" content="I build systems that are supposed to catch their own mistakes.">
 <meta property="og:type" content="website">
@@ -17,49 +19,206 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..700&family=JetBrains+Mono:wght@400..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #0a0a0a; --p-surface: #151515; --p-ink: #efefef; --p-muted: #8c8c8c;
+  --p-accent: #b11226; --p-accent-ink: #ffffff; --p-action: #b11226; --p-action-ink: #ffffff;
+  --p-inv-bg: #efefef; --p-inv-surface: #dcdcdc; --p-inv-ink: #0a0a0a; --p-inv-muted: #565656;
+  --p-inv-accent: #b11226; --p-inv-accent-ink: #ffffff; --p-inv-action: #b11226; --p-inv-action-ink: #ffffff;
+  --font-display: "Schibsted Grotesk", system-ui, sans-serif;
+  --font-text: "Schibsted Grotesk", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --display-weight: 400;
+  --display-tracking: -0.035em;
+  --display-tracking-xl: -0.042em;
+  --ly-scale: 0.98;
+}
+</style>
+<link rel="stylesheet" href="assets/diagrams/diagram.css">
+<script src="assets/backgrounds/backgrounds.js"></script>
+<!-- page CSS: only what sits inside a visual -->
+<style>
+  /* a screenshot as one window: the client's real UI, one radius, a 1px line */
+  .shot { display: block; border: 1px solid var(--line-strong); border-radius: var(--r-md); overflow: hidden; background: var(--surface); box-shadow: 0 24px 60px -24px rgb(0 0 0 / .55); }
+  .shot > img { display: block; width: 100%; height: auto; }
+  .hero__window > .ly-piece.shot { width: min(1040px, calc(100% - 2 * var(--s-6))); }
+  .stage > .at-corner.shot-slot { width: 880px; }
+  @media (max-width: 639px) { .stage > .at-corner.shot-slot { width: auto; } }
+  /* the QuantLab equity curve inside its frame */
+  #quantlab .frame { padding: clamp(24px, 4vw, 56px); }
+  #quantlab .frame svg { display: block; flex: 1 1 auto; width: 100%; height: auto; overflow: visible; }
+  .chart-line { fill: none; stroke: var(--p-accent); stroke-width: 2; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+  .chart-area { fill: var(--p-accent); opacity: .12; }
+  .chart-base { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
+  .chart-tick { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+  .chart-label { font-family: var(--font-mono); font-size: 13px; fill: var(--muted); }
+  @media (max-width: 639px) { .chart-label { display: none; } }
+  /* a card panel holding one screenshot or chart, cut by the panel's bottom */
+  /* each panel at its screenshot's own 16:10, so the whole capture shows at every width */
+  #builds .panel { --p-h: 0px; min-height: 0; aspect-ratio: 16 / 10; }
+  #builds .panel > .frame__img { object-position: left top; }
+  #builds .panel--chart { background: #1a1a19; }
+  #builds .panel--chart > .frame__img { object-fit: contain; object-position: center; }
+  #builds .panel > .loop-pause { position: absolute; right: 12px; bottom: 12px; z-index: 2; }
+  /* stacked one card a row, the three need two screens on a tablet and a phone */
+  @media (min-width: 640px) and (max-width: 1279px) { #builds { --h: 2 } }
+  #builds { --hm: 2; }
+  /* tablet: stacked, the splits fit one screen with a shorter picture and no spec rows */
+  @media (min-width: 640px) and (max-width: 1023px) {
+    #monitor .rows--spec { display: none; }
+    #monitor .frame--split { --ratio: 56%; }
+    #background .frame--split { --ratio: 40%; }
+    #quantlab .frame { padding: 16px; }
+  }
+  /* phone: the spec rows and the row details go (the picture and the lead say it); QuantLab takes two screens */
+  @media (max-width: 639px) {
+    #coach .rows--spec, #monitor .rows--spec, #background .rows > li > p { display: none; }
+    #background .frame--split { --ratio: 40%; }
+    #quantlab { --hm: 2; }
+    #quantlab .frame svg { height: 420px; }
+  }
+  #background .frame__img { object-position: center top; }
+  .hero--centred .hero__lead { color: var(--ink); }
+  #monitor .frame .dg { width: 100%; }
+  @media (min-width: 1024px) { :is(#banking, #credit) .frame--hero:has(> .stage) { aspect-ratio: auto; height: 560px; } }
+</style>
 </head>
 <body>
+<!-- type: software (a portfolio of software projects; site-kind software)
+     deal: hero centred, nav nav-mega -> nav-centre (nav-mega's use is software with 6 to 12 feature pages; a one-page portfolio has none),
+           close close-type, footer footer-columns, rhythm surface-pairs, buttons tonal, mark ring, ground sky -> painting (the dealt effect
+           painterly-landscape needs the painting ground), palette black-crimson, type schibsted, radius sharp
+     effect: painterly-landscape in the hero window
+     moments: none (0 to 2 allowed) -->
 
-<a class="skip" href="#work">Skip to work</a>
-
-<header class="topbar">
-  <div class="wrap topbar__inner">
-    <a class="wordmark" href="#top">Yi-Lei Li</a>
-    <nav aria-label="Sections">
-      <a href="#work">Work</a>
-      <a href="#more">More</a>
-      <a href="#failures">What didn't work</a>
-      <a href="#dashboard">Dashboard</a>
-      <a href="#background">Background</a>
-      <a href="mailto:ray1998514@gmail.com">Email</a>
+<header class="nav nav--centre">
+  <div class="wrap nav__bar">
+    <a class="nav__logo" href="#top"><span class="mark" data-mark="ring" aria-hidden="true"></span>Yi-Lei Li</a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item"><a class="nav__link" href="#coach">Projects</a></div>
+      <div class="nav__item"><a class="nav__link" href="#quantlab">Research</a></div>
+      <div class="nav__item"><a class="nav__link" href="#builds">Builds</a></div>
+      <div class="nav__item"><a class="nav__link" href="#background">Background</a></div>
     </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="mailto:ray1998514@gmail.com">Email Yi-Lei</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
   </div>
 </header>
 
 <main id="top">
 
-  <section class="hero">
-    <div class="wrap hero__grid">
-      <div>
-        <h1>I build systems that are supposed to catch their own mistakes.</h1>
-        <p class="lede">
-          <strong>M.S. in Computer Science, University of Delaware, May 2026.</strong>
-          I work on backend services and data pipelines where being quietly wrong is
-          the expensive failure — a banking API where a transfer either completes on
-          both sides or not at all and SQL checks prove the ledger still adds up, and a
-          backtesting engine whose main job is to throw out strategies that only look
-          good in hindsight.
-        </p>
-        <div class="actions">
-          <a class="btn btn--primary" href="resume/Yi-Lei_Li_Resume_SWE.pdf">Résumé for software roles</a>
-          <a class="btn" href="resume/Yi-Lei_Li_Resume_Data.pdf">Résumé for data roles</a>
+  <section class="hero hero--centred" aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text">
+      <div class="hero__c">
+        <a class="pill" href="#background"><span>M.S. Computer Science</span><span class="muted">May 2026</span></a>
+        <h1 id="hero-h">Yi-Lei Li, software engineer</h1>
+        <p class="hero__lead">I build backend services and data pipelines with tests that check the result, not only the code. Looking for software roles in the New York City area.</p>
+        <div class="btn-row"><a class="btn btn--primary" href="mailto:ray1998514@gmail.com">Email Yi-Lei</a><a class="btn btn--secondary" href="resume/Yi-Lei_Li_Resume_SWE.pdf">Download the résumé</a></div>
+      </div>
+      <div class="hero__window" data-fx="painterly-landscape" data-fx-seed="7" role="img" aria-label="LeetCode Coach's Today page: days until the interview, problems left, today's goal and a 40-day streak">
+        <div class="ly-piece shot" aria-hidden="true">
+          <img src="img/coach-today.webp" srcset="img/coach-today-800.webp 800w, img/coach-today.webp 1760w" sizes="(max-width: 639px) 100vw, 1040px" width="1760" height="1100" alt="" fetchpriority="high" data-source="client" data-subject="LeetCode Coach, Today page">
         </div>
       </div>
+    </div></div>
+  </section>
 
-      <figure class="evidence">
-        <svg viewBox="-4 0 772 216" role="img" aria-labelledby="chart-title chart-desc">
+  <section class="section" id="coach" aria-labelledby="coach-h">
+    <div class="wrap">
+      <div class="grid">
+        <div class="span-6 split-col">
+          <h2 id="coach-h">LeetCode Coach, an interview-prep app that works offline</h2>
+          <p class="t-lead">It plans each day's practice, schedules reviews with the FSRS algorithm and scores spoken explanations with Claude. Changes save in the browser first, then sync to PostgreSQL.</p>
+          <ul class="rows rows--spec">
+            <li><span class="rows__name">Stack</span><span class="rows__value"><img class="ic" src="assets/icons/react.svg" alt="" width="27" height="24" loading="lazy"> React, TypeScript, Hono</span></li>
+            <li><span class="rows__name">Tests</span><span class="rows__value">Unit, API and Playwright</span></li>
+            <li><span class="rows__name">Hosting</span><span class="rows__value">Render; wakes in a minute</span></li>
+          </ul>
+          <a class="link split-col__end" href="https://leetcode-coach-f6q7.onrender.com">Open the live app</a>
+        </div>
+        <div class="frame frame--split frame--lit span-6 start-7">
+          <div class="stage stage--fade-br">
+            <div class="at-corner to-edge shot-slot" style="--ax: 56px; --ay: 56px">
+              <div class="shot"><img src="img/coach-practice.webp" srcset="img/coach-practice-800.webp 800w, img/coach-practice.webp 1400w" sizes="(max-width: 639px) 100vw, 880px" width="1400" height="875" loading="lazy" alt="Timed practice in LeetCode Coach: a timer and the interview steps, one at a time" data-source="client" data-subject="LeetCode Coach, practice page"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="banking" aria-labelledby="banking-h">
+    <div class="wrap">
+      <div class="grid">
+        <h2 class="span-6" id="banking-h">Banking Transactions API</h2>
+        <p class="span-6 start-7">A Spring Boot service on PostgreSQL. Transfers commit both legs or neither, a retried request pays once, and five SQL checks prove the ledger still adds up. <a class="link" href="https://github.com/Lego514/banking-transactions-api">Read the source</a></p>
+      </div>
+      <div class="frame frame--hero frame--lit" style="margin-top: var(--s-7)">
+        <div class="stage stage--fade-b">
+          <div class="at-rise to-edge" style="--w: 880px; --ay: 64px">
+            <div class="shot"><img src="img/banking-console-full.webp" srcset="img/banking-console-full-800.webp 800w, img/banking-console-full.webp 1280w" sizes="(max-width: 639px) 100vw, 880px" width="1280" height="915" loading="lazy" alt="The banking web console: total balance, open account, deposit or withdraw, transfer, and the accounts table" data-source="client" data-subject="Banking Transactions API, web console"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="monitor" aria-labelledby="monitor-h">
+    <div class="wrap">
+      <div class="grid">
+        <div class="span-6 split-col">
+          <h2 id="monitor-h">Job-Opening Monitor over 110 career sites</h2>
+          <p class="t-lead">A scheduled TypeScript job reads more than 22,000 postings a run from Workday, Greenhouse, Lever and others, drops the ones it has seen and sends new matches on.</p>
+          <ul class="rows rows--spec">
+            <li><span class="rows__name">Health</span><span class="rows__value">p95 latency per source</span></li>
+            <li><span class="rows__name">Screening</span><span class="rows__value">Fails closed without credit</span></li>
+            <li><span class="rows__name">Tests</span><span class="rows__value">Over 340 in Vitest</span></li>
+          </ul>
+          <a class="link split-col__end" href="https://github.com/Lego514/job-opening-monitor">Read the source</a>
+        </div>
+        <div class="frame frame--split span-6 start-7">
+          <div class="dg" data-diagram>
+            <script type="application/json">{"layout": "lanes", "alt": "More than 110 career sites feed one dedupe step, which sends new roles to Telegram and email and fills an apply queue of five a day.", "curve": "curve",
+              "input": {"label": "110+ sources", "icon": "ui:globe", "meta": "22,000+ jobs"},
+              "core": {"label": "Dedupe", "icon": "supabase"},
+              "lanes": [
+                {"label": "Telegram", "icon": "telegram", "meta": "new roles", "done": true},
+                {"label": "Email", "icon": "ui:mail", "meta": "new roles", "done": true},
+                {"label": "Queue", "icon": "ui:list-checks", "meta": "5 a day", "done": true}
+              ]}</script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-surface" id="quantlab" aria-labelledby="quantlab-h">
+    <div class="wrap">
+      <div class="grid">
+        <h2 class="span-6" id="quantlab-h">QuantLab and the strategies it rejected</h2>
+        <p class="span-6 start-7">Strategies are scored only on data their parameters never saw. The kept one went from Sharpe 1.29 to 1.08 after new data, three bug fixes and next-open fills. <a class="link" href="https://github.com/Lego514/quantlab/blob/main/STRATEGY_2026.md#second-restatement-2026-10-28">Read the corrections</a></p>
+      </div>
+      <div class="grid" style="margin-top: var(--s-7)">
+        <ul class="rows span-6">
+          <li><span class="rows__name">Volatility-targeted momentum</span><p>Sharpe 1.08 at a −15.6% drawdown</p><span class="rows__value">Kept</span></li>
+          <li><span class="rows__name">Weekly altcoin rotation</span><p>77–132% a year fitted, −3% held out</p><span class="rows__value">Rejected</span></li>
+          <li><span class="rows__name">One-hour Donchian breakout</span><p>Sharpe 4.36 fitted, −0.89 held out</p><span class="rows__value">Rejected</span></li>
+          <li><span class="rows__name">4x leverage on the kept strategy</span><p>12.3% a year, −63% drawdown</p><span class="rows__value">Rejected</span></li>
+          <li><span class="rows__name">Polymarket favourites</span><p>No edge on prices that could be traded</p><span class="rows__value">Rejected</span></li>
+        </ul>
+        <div class="frame span-6 start-7" role="img" aria-label="Walk-forward out-of-sample equity from 2018 to 2026: the kept portfolio grows from 1.0 to about 2.4">
+          <svg viewBox="-4 0 772 232" preserveAspectRatio="none" aria-hidden="true">
           <title id="chart-title">Walk-forward out-of-sample equity curve, 2018 to 2026</title>
           <desc id="chart-desc">A 50/50 QQQ and Bitcoin volatility-targeted momentum portfolio grows from 1.0 to about 2.4 over eight and a half years, measured only on data the parameter search never saw.</desc>
           <line class="chart-tick" x1="74.4" y1="0" x2="74.4" y2="210.0"></line>
@@ -83,397 +242,129 @@
           <path class="chart-area" d="M 0.0 173.92 L 2.91 171.73 L 5.33 175.29 L 8.48 177.34 L 11.39 177.34 L 13.81 177.64 L 16.72 177.7 L 19.15 178.46 L 22.3 178.6 L 25.2 178.39 L 27.63 178.43 L 30.78 179.15 L 33.69 176.9 L 36.11 176.79 L 39.02 176.35 L 41.93 177.05 L 44.35 173.91 L 47.5 175.59 L 50.41 174.69 L 52.83 175.14 L 55.74 180.51 L 58.16 181.0 L 61.07 181.0 L 63.98 181.82 L 66.65 181.82 L 69.8 181.82 L 73.19 181.82 L 76.34 181.82 L 79.49 181.82 L 81.91 181.88 L 84.82 182.44 L 87.97 183.15 L 90.4 184.0 L 93.3 180.57 L 96.21 178.9 L 98.64 171.39 L 101.79 168.95 L 104.69 167.79 L 107.12 162.64 L 110.27 164.52 L 113.18 164.61 L 115.6 160.46 L 118.51 157.09 L 121.66 155.41 L 124.08 156.36 L 126.99 158.5 L 129.41 160.13 L 132.32 160.49 L 135.47 158.62 L 137.9 158.93 L 140.8 160.08 L 143.71 160.08 L 146.14 159.45 L 149.04 157.23 L 151.47 156.37 L 154.38 155.37 L 157.53 156.04 L 159.95 153.58 L 163.34 152.65 L 166.25 150.86 L 169.4 149.29 L 171.82 145.96 L 174.97 144.8 L 177.88 153.94 L 180.31 157.76 L 183.21 157.76 L 186.12 157.76 L 188.79 157.76 L 191.94 158.01 L 194.85 158.41 L 197.27 157.84 L 200.42 156.0 L 203.33 155.03 L 205.75 156.19 L 208.9 152.8 L 211.81 151.9 L 214.23 143.3 L 217.14 141.75 L 220.05 139.21 L 222.47 142.21 L 225.62 142.88 L 228.53 143.1 L 230.96 142.59 L 233.86 142.26 L 236.29 140.45 L 239.2 134.97 L 242.1 131.58 L 244.77 130.7 L 247.68 127.64 L 250.83 122.27 L 253.98 116.6 L 256.65 114.64 L 259.55 113.1 L 262.7 107.5 L 265.13 112.71 L 268.04 112.44 L 270.94 111.65 L 273.37 109.95 L 276.52 106.63 L 279.43 110.19 L 281.85 111.52 L 284.76 115.27 L 287.18 111.57 L 290.33 110.18 L 293.24 108.49 L 295.66 105.75 L 298.81 105.27 L 301.72 104.28 L 304.87 99.24 L 307.3 100.19 L 310.2 95.91 L 313.35 97.84 L 315.78 98.7 L 318.69 102.11 L 321.11 97.69 L 324.02 96.31 L 326.93 88.5 L 329.35 92.05 L 332.5 95.48 L 335.41 97.81 L 337.83 97.04 L 340.98 98.98 L 344.13 101.15 L 346.56 100.99 L 349.46 100.99 L 352.61 100.99 L 355.04 100.99 L 357.95 102.05 L 360.85 99.68 L 363.28 101.65 L 366.43 102.02 L 369.34 104.9 L 371.76 107.02 L 374.67 107.02 L 377.82 107.02 L 380.48 107.02 L 383.64 107.02 L 386.79 107.02 L 389.69 107.02 L 392.12 107.02 L 395.03 107.57 L 397.45 112.17 L 400.6 112.68 L 403.51 113.79 L 405.93 113.79 L 408.84 113.79 L 411.75 113.45 L 414.17 115.41 L 417.08 118.43 L 420.23 119.3 L 422.65 119.3 L 425.56 119.3 L 428.95 119.3 L 431.38 113.34 L 434.53 107.92 L 437.44 104.31 L 439.86 103.85 L 443.01 106.39 L 445.92 104.66 L 448.34 99.59 L 451.25 98.03 L 454.4 95.53 L 456.82 95.73 L 459.73 97.03 L 462.64 95.21 L 465.31 91.0 L 468.21 88.25 L 471.36 86.25 L 474.52 85.92 L 476.94 84.1 L 479.85 82.89 L 482.27 87.72 L 485.18 96.21 L 488.33 94.28 L 490.75 96.02 L 493.66 99.58 L 496.57 96.87 L 498.99 98.32 L 501.9 91.82 L 504.32 86.53 L 507.23 84.12 L 510.38 78.85 L 512.81 75.75 L 515.96 73.44 L 519.11 70.75 L 522.26 71.98 L 524.68 68.12 L 527.59 61.05 L 530.74 54.63 L 533.89 49.78 L 536.31 50.16 L 539.46 50.97 L 542.37 54.71 L 544.8 55.89 L 547.7 53.01 L 550.13 47.77 L 553.28 47.09 L 556.19 43.36 L 559.34 48.55 L 562.0 41.75 L 564.91 45.26 L 567.82 50.18 L 570.48 52.1 L 573.39 47.56 L 576.54 51.17 L 578.97 49.31 L 581.88 47.43 L 584.78 48.22 L 587.21 46.3 L 590.11 40.45 L 592.54 34.68 L 595.45 29.1 L 598.6 25.45 L 601.02 20.57 L 604.17 23.12 L 607.32 26.16 L 610.71 19.34 L 613.62 22.82 L 616.05 21.33 L 619.2 33.53 L 622.1 42.13 L 624.53 42.38 L 627.44 42.38 L 629.86 42.38 L 633.01 42.38 L 635.92 42.58 L 638.34 39.91 L 641.49 40.84 L 644.4 38.25 L 647.55 41.79 L 649.97 35.69 L 653.12 30.28 L 656.03 28.3 L 658.46 28.26 L 661.36 30.48 L 663.79 32.15 L 666.94 25.57 L 669.85 24.79 L 672.27 17.06 L 675.18 23.24 L 678.09 16.37 L 680.51 23.57 L 683.42 26.02 L 686.57 22.63 L 688.99 21.26 L 691.9 21.72 L 695.29 21.44 L 697.72 21.89 L 700.87 20.13 L 703.78 23.92 L 706.93 27.57 L 709.35 28.43 L 712.26 30.18 L 714.68 30.18 L 717.83 30.55 L 720.74 27.35 L 723.16 23.24 L 726.07 17.37 L 729.22 14.71 L 731.65 19.36 L 734.55 16.4 L 737.7 14.9 L 740.85 17.26 L 743.28 19.2 L 746.19 15.35 L 748.61 14.44 L 751.52 17.03 L 754.67 17.77 L 757.09 18.27 L 760.0 12.0 L 760.0 210.0 L 0 210.0 Z"></path>
           <path class="chart-line" d="M 0.0 173.92 L 2.91 171.73 L 5.33 175.29 L 8.48 177.34 L 11.39 177.34 L 13.81 177.64 L 16.72 177.7 L 19.15 178.46 L 22.3 178.6 L 25.2 178.39 L 27.63 178.43 L 30.78 179.15 L 33.69 176.9 L 36.11 176.79 L 39.02 176.35 L 41.93 177.05 L 44.35 173.91 L 47.5 175.59 L 50.41 174.69 L 52.83 175.14 L 55.74 180.51 L 58.16 181.0 L 61.07 181.0 L 63.98 181.82 L 66.65 181.82 L 69.8 181.82 L 73.19 181.82 L 76.34 181.82 L 79.49 181.82 L 81.91 181.88 L 84.82 182.44 L 87.97 183.15 L 90.4 184.0 L 93.3 180.57 L 96.21 178.9 L 98.64 171.39 L 101.79 168.95 L 104.69 167.79 L 107.12 162.64 L 110.27 164.52 L 113.18 164.61 L 115.6 160.46 L 118.51 157.09 L 121.66 155.41 L 124.08 156.36 L 126.99 158.5 L 129.41 160.13 L 132.32 160.49 L 135.47 158.62 L 137.9 158.93 L 140.8 160.08 L 143.71 160.08 L 146.14 159.45 L 149.04 157.23 L 151.47 156.37 L 154.38 155.37 L 157.53 156.04 L 159.95 153.58 L 163.34 152.65 L 166.25 150.86 L 169.4 149.29 L 171.82 145.96 L 174.97 144.8 L 177.88 153.94 L 180.31 157.76 L 183.21 157.76 L 186.12 157.76 L 188.79 157.76 L 191.94 158.01 L 194.85 158.41 L 197.27 157.84 L 200.42 156.0 L 203.33 155.03 L 205.75 156.19 L 208.9 152.8 L 211.81 151.9 L 214.23 143.3 L 217.14 141.75 L 220.05 139.21 L 222.47 142.21 L 225.62 142.88 L 228.53 143.1 L 230.96 142.59 L 233.86 142.26 L 236.29 140.45 L 239.2 134.97 L 242.1 131.58 L 244.77 130.7 L 247.68 127.64 L 250.83 122.27 L 253.98 116.6 L 256.65 114.64 L 259.55 113.1 L 262.7 107.5 L 265.13 112.71 L 268.04 112.44 L 270.94 111.65 L 273.37 109.95 L 276.52 106.63 L 279.43 110.19 L 281.85 111.52 L 284.76 115.27 L 287.18 111.57 L 290.33 110.18 L 293.24 108.49 L 295.66 105.75 L 298.81 105.27 L 301.72 104.28 L 304.87 99.24 L 307.3 100.19 L 310.2 95.91 L 313.35 97.84 L 315.78 98.7 L 318.69 102.11 L 321.11 97.69 L 324.02 96.31 L 326.93 88.5 L 329.35 92.05 L 332.5 95.48 L 335.41 97.81 L 337.83 97.04 L 340.98 98.98 L 344.13 101.15 L 346.56 100.99 L 349.46 100.99 L 352.61 100.99 L 355.04 100.99 L 357.95 102.05 L 360.85 99.68 L 363.28 101.65 L 366.43 102.02 L 369.34 104.9 L 371.76 107.02 L 374.67 107.02 L 377.82 107.02 L 380.48 107.02 L 383.64 107.02 L 386.79 107.02 L 389.69 107.02 L 392.12 107.02 L 395.03 107.57 L 397.45 112.17 L 400.6 112.68 L 403.51 113.79 L 405.93 113.79 L 408.84 113.79 L 411.75 113.45 L 414.17 115.41 L 417.08 118.43 L 420.23 119.3 L 422.65 119.3 L 425.56 119.3 L 428.95 119.3 L 431.38 113.34 L 434.53 107.92 L 437.44 104.31 L 439.86 103.85 L 443.01 106.39 L 445.92 104.66 L 448.34 99.59 L 451.25 98.03 L 454.4 95.53 L 456.82 95.73 L 459.73 97.03 L 462.64 95.21 L 465.31 91.0 L 468.21 88.25 L 471.36 86.25 L 474.52 85.92 L 476.94 84.1 L 479.85 82.89 L 482.27 87.72 L 485.18 96.21 L 488.33 94.28 L 490.75 96.02 L 493.66 99.58 L 496.57 96.87 L 498.99 98.32 L 501.9 91.82 L 504.32 86.53 L 507.23 84.12 L 510.38 78.85 L 512.81 75.75 L 515.96 73.44 L 519.11 70.75 L 522.26 71.98 L 524.68 68.12 L 527.59 61.05 L 530.74 54.63 L 533.89 49.78 L 536.31 50.16 L 539.46 50.97 L 542.37 54.71 L 544.8 55.89 L 547.7 53.01 L 550.13 47.77 L 553.28 47.09 L 556.19 43.36 L 559.34 48.55 L 562.0 41.75 L 564.91 45.26 L 567.82 50.18 L 570.48 52.1 L 573.39 47.56 L 576.54 51.17 L 578.97 49.31 L 581.88 47.43 L 584.78 48.22 L 587.21 46.3 L 590.11 40.45 L 592.54 34.68 L 595.45 29.1 L 598.6 25.45 L 601.02 20.57 L 604.17 23.12 L 607.32 26.16 L 610.71 19.34 L 613.62 22.82 L 616.05 21.33 L 619.2 33.53 L 622.1 42.13 L 624.53 42.38 L 627.44 42.38 L 629.86 42.38 L 633.01 42.38 L 635.92 42.58 L 638.34 39.91 L 641.49 40.84 L 644.4 38.25 L 647.55 41.79 L 649.97 35.69 L 653.12 30.28 L 656.03 28.3 L 658.46 28.26 L 661.36 30.48 L 663.79 32.15 L 666.94 25.57 L 669.85 24.79 L 672.27 17.06 L 675.18 23.24 L 678.09 16.37 L 680.51 23.57 L 683.42 26.02 L 686.57 22.63 L 688.99 21.26 L 691.9 21.72 L 695.29 21.44 L 697.72 21.89 L 700.87 20.13 L 703.78 23.92 L 706.93 27.57 L 709.35 28.43 L 712.26 30.18 L 714.68 30.18 L 717.83 30.55 L 720.74 27.35 L 723.16 23.24 L 726.07 17.37 L 729.22 14.71 L 731.65 19.36 L 734.55 16.4 L 737.7 14.9 L 740.85 17.26 L 743.28 19.2 L 746.19 15.35 L 748.61 14.44 L 751.52 17.03 L 754.67 17.77 L 757.09 18.27 L 760.0 12.0"></path>
         </svg>
-        <figcaption>
-          Walk-forward out-of-sample equity, 2018&ndash;2026. Half QQQ, half Bitcoin,
-          each leg sized by target volatility, trading only on parameters fitted to
-          earlier data, filled at the next day's open, and charged
-          <span class="num">0.1%</span> fees plus <span class="num">0.05%</span> slippage.
-          Sharpe <span class="num">1.08</span> (95% interval
-          <span class="num">0.34&ndash;1.78</span>), worst drawdown
-          <span class="num">&minus;15.6%</span>.
-          In July this chart said <span class="num">1.29</span>. Three more months of
-          data brought it to <span class="num">1.09</span>; fixing
-          <a href="https://github.com/Lego514/quantlab/blob/main/STRATEGY_2026.md#correction-2026-09-30">three
-          calendar bugs</a> in my own pipeline brought it to <span class="num">1.05</span>;
-          and <a href="https://github.com/Lego514/quantlab/blob/main/STRATEGY_2026.md#second-restatement-2026-10-28">filling
-          at the next open</a> instead of the close that produced the signal brought it
-          to <span class="num">1.08</span>.
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <section class="section" id="work">
-    <div class="wrap">
-      <h2>Five things I have built</h2>
-      <p class="section__intro">
-        All the code is public. The numbers are measured on held-out data, not estimated.
-      </p>
-
-      <div class="projects">
-
-        <article class="project">
-          <div class="project__id">
-            <h3>LeetCode Coach</h3>
-            <p class="project__stack">React, TypeScript, Hono, PostgreSQL</p>
-            <p class="project__links">
-              <a href="https://github.com/Lego514/leetcode-coach">Source</a>
-              <a href="https://leetcode-coach-f6q7.onrender.com">Live app</a>
-              <span class="link-note">may take about a minute to wake</span>
-            </p>
-          </div>
-          <div class="project__body">
-            <a class="thumb" href="https://leetcode-coach-f6q7.onrender.com">
-              <img src="img/leetcode-coach.webp" width="1280" height="800" loading="lazy" decoding="async"
-                alt="LeetCode Coach's Today page: days until the interview, today's goal, a streak, and the algorithm tree">
-            </a>
-            <p>
-              A deployed, offline-first web app for interview prep: it plans what to
-              practise each day, schedules reviews with the FSRS spaced-repetition
-              algorithm — checked against the reference implementation on hundreds of
-              random review histories — and runs timed mock interviews whose spoken
-              explanations Claude scores against a five-point rubric.
-            </p>
-            <p>
-              Every write lands in the browser's IndexedDB together with an outbox entry
-              in the same transaction, then syncs to PostgreSQL. The server assigns
-              versions from a sequence under a per-user advisory lock, so a sync cursor
-              never skips a change. Unit, API, and Playwright end-to-end tests gate every
-              deploy.
-            </p>
-          </div>
-        </article>
-
-        <article class="project">
-          <div class="project__id">
-            <h3>Banking Transactions API</h3>
-            <p class="project__stack">Java 21, Spring Boot 3, PostgreSQL</p>
-            <p class="project__links"><a href="https://github.com/Lego514/banking-transactions-api">Source</a></p>
-          </div>
-          <div class="project__body">
-            <a class="thumb" href="https://github.com/Lego514/banking-transactions-api">
-              <img src="img/banking-console.webp" width="1280" height="800" loading="lazy" decoding="async"
-                alt="The banking web console: totals, forms to open accounts, deposit, withdraw and transfer, and the accounts table">
-            </a>
-            <p>
-              A core banking service: accounts, deposits and withdrawals that reject
-              overdrafts, and transfers that either commit on both legs or roll back
-              entirely.
-            </p>
-            <p>
-              Concurrent transfers take row locks in ascending account-id order, which
-              rules out both double-spend and deadlock; a CI test fires
-              <span class="num">100</span> opposite transfers at once against a real
-              PostgreSQL and checks that no money is created. An
-              <code>Idempotency-Key</code> header means a client that times out and
-              retries cannot pay twice.
-            </p>
-            <p>
-              Every balance movement writes an immutable ledger row, and five SQL
-              reconciliation queries — a window-function running total, paired transfer
-              legs, conservation of money — return the rows that break a rule. Each check
-              is proven by a test that corrupts one row and expects it to be caught.
-              <span class="num">32</span> tests run in GitHub Actions on every push.
-            </p>
-          </div>
-        </article>
-
-        <article class="project">
-          <div class="project__id">
-            <h3>Job-Opening Monitor</h3>
-            <p class="project__stack">Node.js, TypeScript, Supabase</p>
-            <p class="project__links"><a href="https://github.com/Lego514/job-opening-monitor">Source</a></p>
-          </div>
-          <div class="project__body">
-            <p>
-              A scheduled pipeline that reads more than <span class="num">22,000</span>
-              postings per run from over <span class="num">110</span> sources — Workday,
-              Greenhouse, Lever, Ashby, SmartRecruiters and others — and normalizes them
-              behind one adapter layer, with bounded-concurrency fetches and one failing
-              source never taking down the run.
-            </p>
-            <p>
-              A Postgres state table makes re-runs idempotent, so nothing ever alerts
-              twice. Each run reports per-source health — p95 latency and whether a
-              failure was DNS, timeout, rate limit, HTTP, or parsing. A language-model
-              screening stage fails closed: when its API credit ran out, it held results
-              back instead of letting unscreened ones through. Over
-              <span class="num">340</span> Vitest tests.
-            </p>
-          </div>
-        </article>
-
-        <article class="project">
-          <div class="project__id">
-            <h3>QuantLab</h3>
-            <p class="project__stack">Python, pandas, NumPy</p>
-            <p class="project__links"><a href="https://github.com/Lego514/quantlab">Source</a></p>
-          </div>
-          <div class="project__body">
-            <p>
-              A backtesting and research engine for equities, crypto, and prediction
-              markets. Every signal fills on the <em>next</em> bar, so a strategy cannot
-              trade on information it would not have had at the time. Fees and slippage
-              are charged on turnover, and every result is scored against simply holding
-              the asset — a strategy that cannot beat holding is not a strategy.
-            </p>
-            <p>
-              Seven strategies sit behind one interface, and a registry discovers new ones
-              automatically, so adding a strategy requires no change to the engine.
-              Anchored walk-forward validation reports in-sample against out-of-sample
-              Sharpe for each fold, which is the quickest way to see that a parameter set
-              was fitted rather than found.
-            </p>
-          </div>
-        </article>
-
-        <article class="project">
-          <div class="project__id">
-            <h3>Credit Card Default Risk</h3>
-            <p class="project__stack">Python, SQL, XGBoost, SHAP, Tableau</p>
-            <p class="project__links">
-              <a href="https://github.com/Lego514/credit-card-default-risk">Source</a>
-              <a href="#dashboard">Dashboard</a>
-            </p>
-          </div>
-          <div class="project__body">
-            <p>
-              Portfolio risk analysis across <span class="num">30,000</span> credit card
-              customers. Five SQL analyses using window functions and CTEs, then logistic
-              regression against XGBoost, reaching <span class="num">0.777</span> AUC on
-              a held-out set, with SHAP attributing each prediction to its features.
-              The riskiest decile contains <span class="num">31%</span> of all defaults,
-              a <span class="num">3.1x</span> lift over the base rate.
-            </p>
-            <p>
-              A grounded language-model layer drafts the weekly risk memo from the query
-              output rather than from recall, so every sentence traces back to a number
-              in the data.
-            </p>
-          </div>
-        </article>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="more">
+  <section class="section" id="credit" aria-labelledby="credit-h">
     <div class="wrap">
-      <h2>Smaller builds</h2>
-      <p class="section__intro">
-        Side projects outside data and backend work: a whiteboard component, a
-        graphics piece, and a networking lab.
-      </p>
-
-      <div class="minis">
-
-        <article class="mini">
-          <a class="thumb" href="https://lego514.github.io/dsa-whiteboard/">
-            <img src="img/dsa-whiteboard.webp" width="1280" height="800" loading="lazy" decoding="async"
-              alt="DSA Whiteboard with the Tree DFS template: a binary tree, a node pointer on the root, and a stack">
-          </a>
-          <h3>DSA Whiteboard</h3>
-          <p class="project__stack">React, TypeScript, Cloudflare Durable Objects</p>
-          <p>
-            A whiteboard for tracing algorithms by hand — arrays with pointers, trees,
-            graphs, heaps, DP tables — with step playback and live co-editing over
-            WebSockets. Split out of LeetCode Coach into its own package.
-          </p>
-          <p class="project__links">
-            <a href="https://github.com/Lego514/dsa-whiteboard">Source</a>
-            <a href="https://lego514.github.io/dsa-whiteboard/">Try it</a>
-          </p>
-        </article>
-
-        <article class="mini">
-          <a class="thumb" href="https://lego514.github.io/shallow-sea/">
-            <img src="img/shallow-sea.webp" width="864" height="540" loading="lazy" decoding="async"
-              alt="Shallow Sea from above: a beach, clear shallows over rocks, coral, and fish in deeper blue water">
-          </a>
-          <h3>Shallow Sea</h3>
-          <p class="project__stack">WebGL2, GLSL, no libraries</p>
-          <p>
-            An interactive tropical-shore wallpaper rendered live: refraction, caustics,
-            and depth-dependent wave physics on the GPU. Cold start went from about
-            <span class="num">42</span> s to <span class="num">2.3</span> s after
-            profiling shader compilation; CI compares rendered scenes pixel by pixel.
-          </p>
-          <p class="project__links">
-            <a href="https://github.com/Lego514/shallow-sea">Source</a>
-            <a href="https://lego514.github.io/shallow-sea/">Try it</a>
-          </p>
-        </article>
-
-        <article class="mini">
-          <h3>RoomFlow</h3>
-          <p class="project__stack">Linux network namespaces, tc, CAKE, Node.js</p>
-          <p>
-            Can a video call survive a roommate saturating the shared link? Measured on
-            real packets in CI: a plain FIFO queue pushed meeting p95 latency to
-            <span class="num">288</span> ms; CAKE held it at
-            <span class="num">43.9</span> ms with no meeting packet loss.
-          </p>
-          <p class="project__links">
-            <a href="https://github.com/Lego514/roomflow">Source</a>
-          </p>
-        </article>
+      <div class="grid">
+        <h2 class="span-6" id="credit-h">Credit Card Default Risk</h2>
+        <p class="span-6 start-7">30,000 customers. SQL window functions segment the book, XGBoost reaches 0.777 AUC held out, and the riskiest tenth holds 31% of all defaults. <a class="link" href="https://public.tableau.com/app/profile/lego.li/viz/credit_card_dashboard_17840541754490/CreditCardDefaultRisk30000CustomersUCITaiwan2005">Open the Tableau dashboard</a></p>
       </div>
-    </div>
-  </section>
-
-  <section class="section failures" id="failures">
-    <div class="wrap">
-      <h2>What didn't work</h2>
-      <p class="section__intro">
-        I went looking for a strategy returning 50% a year. Four of the five routes I
-        tried died the moment they met data they had not been fitted on, or prices that
-        could actually have been traded. Keeping that record is more useful than
-        deleting it.
-      </p>
-
-      <div class="ftable-scroll">
-        <table class="ftable">
-          <thead>
-            <tr>
-              <th scope="col">Route</th>
-              <th scope="col">Fitted on past data</th>
-              <th scope="col">Held-out result</th>
-              <th scope="col">Verdict</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="t-path">Weekly altcoin rotation</td>
-              <td><span class="num">77&ndash;132%</span> a year</td>
-              <td><span class="num">&minus;3%</span> a year from 2024</td>
-              <td class="verdict verdict--dead">Dead</td>
-            </tr>
-            <tr>
-              <td class="t-path">One-hour Donchian breakout</td>
-              <td>Sharpe <span class="num">4.36</span></td>
-              <td>Sharpe <span class="num">&minus;0.89</span></td>
-              <td class="verdict verdict--dead">Dead</td>
-            </tr>
-            <tr>
-              <td class="t-path">4x leverage on the survivor</td>
-              <td>&mdash;</td>
-              <td><span class="num">12.3%</span> a year at <span class="num">&minus;63%</span> drawdown</td>
-              <td class="verdict verdict--dead">Dead</td>
-            </tr>
-            <tr>
-              <td class="t-path">Polymarket favourites</td>
-              <td><span class="num">16</span> of <span class="num">16</span> won</td>
-              <td><span class="num">96%</span> won at a <span class="num">0.94</span> price, not significant</td>
-              <td class="verdict verdict--dead">Dead</td>
-            </tr>
-            <tr class="row--kept">
-              <td class="t-path">Volatility-targeted momentum</td>
-              <td>&mdash;</td>
-              <td>Sharpe <span class="num">1.08</span> at <span class="num">&minus;15.6%</span> drawdown</td>
-              <td class="verdict verdict--kept">Kept</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p class="lesson">
-        <strong>The honest way to raise returns is not a cleverer signal.</strong>
-        It is either accepting the roughly 1-to-1.5 return-to-drawdown arithmetic of
-        trend following, or finding a structural mispricing and then being strict about
-        whether the sample supports the claim and whether its prices could actually
-        have been traded. Polymarket favourites looked like that
-        kind of mispricing at sixteen wins from sixteen. Rerun on
-        <span class="num">587</span> markets, entering at the last real trade two weeks
-        out, the apparent edge sat in stale prices: on fresh ones, favourites won
-        <span class="num">96%</span> of the time against an average price of
-        <span class="num">0.94</span>, an edge too small to tell from luck. The one
-        candidate mispricing failed both tests.
-      </p>
-    </div>
-  </section>
-
-  <section class="section" id="dashboard">
-    <div class="wrap">
-      <h2>Credit risk, for someone who has to act on it</h2>
-      <p class="section__intro">
-        The same 30,000 customers, built for a portfolio manager rather than a reader:
-        utilization deciles, risk tiers, and the three figures worth checking first.
-      </p>
-      <div class="viz-frame">
-        <iframe
-          title="Credit card default risk dashboard, 30,000 customers"
-          src="https://public.tableau.com/views/credit_card_dashboard_17840541754490/CreditCardDefaultRisk30000CustomersUCITaiwan2005?:showVizHome=no&amp;:embed=true"
-          loading="lazy"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" id="background">
-    <div class="wrap">
-      <h2>Background</h2>
-      <div class="bg-grid">
-
-        <div>
-          <h3 class="col-head">Education</h3>
-          <div class="entry">
-            <h3>University of Delaware</h3>
-            <p class="when">Newark, Delaware &nbsp; May 2026</p>
-            <p>M.S. Computer Science. GPA <span class="num">3.66</span> / 4.0.</p>
-          </div>
-          <div class="entry">
-            <h3>National Kaohsiung University of Science and Technology</h3>
-            <p class="when">Kaohsiung, Taiwan &nbsp; 2020</p>
-            <p>B.S. Electrical Engineering.</p>
+      <div class="frame frame--hero frame--lit" style="margin-top: var(--s-7)">
+        <div class="stage stage--fade-b">
+          <div class="at-rise to-edge" style="--w: 960px; --ay: 64px">
+            <div class="shot"><img src="img/credit-dashboard.webp" srcset="img/credit-dashboard-800.webp 800w, img/credit-dashboard.webp 1380w" sizes="(max-width: 639px) 100vw, 960px" width="1380" height="900" loading="lazy" alt="The Tableau dashboard: default rate by payment behaviour, utilization deciles and risk tiers" data-source="client" data-subject="Credit card default risk dashboard"></div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div>
-          <h3 class="col-head">Experience</h3>
-          <div class="entry">
-            <h3>Cathay Financial Holdings</h3>
-            <p class="when">Taipei, Taiwan &nbsp; July to November 2023</p>
-            <p>
-              Back-end software engineering intern. Built a CRUD service in Java and SQL
-              on an Agile team, and traced the firm's transaction-processing flow end to
-              end: balance checks before a transfer, and concurrency control that
-              serializes transactions per account.
-            </p>
+  <section class="section" id="builds" aria-labelledby="builds-h">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 id="builds-h">Three side projects <span class="muted">outside data and backend work</span></h2>
+      </div>
+      <div class="grid">
+        <article class="card card--open span-4">
+          <h3><a href="https://lego514.github.io/dsa-whiteboard/">DSA Whiteboard</a></h3>
+          <p>Traces algorithms by hand: arrays with pointers, trees, heaps and DP tables, with step playback and live co-editing.</p>
+          <div class="panel"><img class="frame__img" src="img/whiteboard-dark.webp" srcset="img/whiteboard-dark-800.webp 800w, img/whiteboard-dark.webp 1280w" sizes="(max-width: 1023px) 100vw, 410px" width="1280" height="800" loading="lazy" alt="DSA Whiteboard with a binary tree, a node pointer and a stack" data-source="client" data-subject="DSA Whiteboard"></div>
+        </article>
+        <article class="card card--open span-4">
+          <h3><a href="https://lego514.github.io/shallow-sea/">Shallow Sea</a></h3>
+          <p>Renders a tropical shore live in plain WebGL2; profiling cut its cold start from 42 s to 2.3 s.</p>
+          <div class="panel" data-sea>
+            <video class="frame__img" muted loop playsinline preload="none" width="800" height="500" poster="img/shallow-sea-still.webp" aria-label="Shallow Sea from above: dolphins, rays and fish swim over coral in clear blue water" data-source="client" data-subject="Shallow Sea">
+              <source src="img/shallow-sea-loop.mp4" type="video/mp4">
+            </video>
+            <button class="loop-pause" type="button" aria-label="Pause animation" title="Pause animation"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 3h3v10H4zM9 3h3v10H9z"/></svg></button>
           </div>
-          <div class="entry">
-            <h3>Chang Gung University</h3>
-            <p class="when">Taoyuan, Taiwan &nbsp; 2021 to 2022</p>
-            <p>
-              Graduate research assistant working on neural radiance fields for
-              reconstructing 3D scenes from multi-view images. Earlier, as an
-              undergraduate assistant, a full-stack IoT sensor dashboard over REST and
-              WebSocket.
-            </p>
-          </div>
+        </article>
+        <article class="card card--open span-4">
+          <h3><a href="https://github.com/Lego514/roomflow">RoomFlow</a></h3>
+          <p>Measures a shared home link: FIFO pushed call latency to 288 ms at p95, CAKE held it at 43.9 ms.</p>
+          <div class="panel panel--chart"><img class="frame__img" src="img/roomflow-latency.svg" width="760" height="380" loading="lazy" alt="Meeting latency over time: FIFO climbs to about 280 ms, CAKE stays near 44 ms" data-source="client" data-subject="RoomFlow latency results"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section ground-surface" id="background" aria-labelledby="background-h">
+    <div class="wrap">
+      <div class="grid">
+        <div class="span-6 split-col">
+          <h2 id="background-h">Education and experience</h2>
+          <ul class="rows">
+            <li><span class="rows__name">University of Delaware</span><p>M.S. Computer Science, GPA 3.66</p><span class="rows__value">May 2026</span></li>
+            <li><span class="rows__name">Cathay Financial Holdings</span><p>Back-end intern: a Java and SQL service and the bank's transfer flow</p><span class="rows__value">2023</span></li>
+            <li><span class="rows__name">Chang Gung University</span><p>Research assistant: neural radiance fields for 3D scenes</p><span class="rows__value">2021–2022</span></li>
+            <li><span class="rows__name">National Kaohsiung University of Science and Technology</span><p>B.S. Electrical Engineering</p><span class="rows__value">2020</span></li>
+          </ul>
+          <div class="btn-row split-col__end"><a class="btn btn--secondary" href="resume/Yi-Lei_Li_Resume_Data.pdf">Download the data résumé</a></div>
         </div>
-
+        <div class="frame frame--photo frame--split span-6 start-7">
+          <img class="frame__img" src="img/resume-swe-page1.webp" srcset="img/resume-swe-page1-800.webp 800w, img/resume-swe-page1.webp 1000w" sizes="(max-width: 1023px) 100vw, 628px" width="1000" height="1294" loading="lazy" alt="The first page of Yi-Lei Li's software engineering résumé" data-source="client" data-subject="Résumé, first page">
+        </div>
       </div>
     </div>
   </section>
 
 </main>
 
-<footer class="foot">
-  <div class="wrap foot__grid">
-    <div>
-      <p class="contact-line"><a href="mailto:ray1998514@gmail.com">ray1998514@gmail.com</a></p>
-      <p class="meta">
-        Based in Newark, Delaware. Looking for roles in the New York City area, and
-        open to Delaware and Philadelphia.
-        Authorized to work in the United States on F-1 OPT, and eligible for the
-        24-month STEM extension.
-      </p>
+<footer class="footer closing" id="contact" aria-labelledby="close-h">
+  <div class="wrap">
+    <div class="closing__cta close--type">
+      <div class="section-head">
+        <h2 id="close-h">Email Yi-Lei about a software role</h2>
+        <p class="t-small muted">Based in Newark, Delaware. Authorized to work in the United States on F-1 OPT, and eligible for the 24-month STEM extension.</p>
+      </div>
+      <a class="btn btn--primary btn--xl btn--wide" href="mailto:ray1998514@gmail.com">Email Yi-Lei<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
     </div>
-    <p class="links">
-      <a href="https://github.com/Lego514">GitHub</a>
-      <a href="https://www.linkedin.com/in/legoli/">LinkedIn</a>
-      <a href="https://public.tableau.com/app/profile/lego.li/">Tableau</a>
-    </p>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-4 stack-4">
+          <a class="nav__logo" href="#top"><span class="mark" data-mark="ring" aria-hidden="true"></span>Yi-Lei Li</a>
+          <p class="footer__lede">Software and data, tested end to end.</p>
+        </div>
+        <div class="span-2 footer__col"><h4>Projects</h4><ul><li><a href="#coach">LeetCode Coach</a></li><li><a href="#banking">Banking API</a></li><li><a href="#monitor">Job monitor</a></li></ul></div>
+        <div class="span-2 footer__col"><h4>Research</h4><ul><li><a href="#quantlab">QuantLab</a></li><li><a href="#credit">Credit risk</a></li></ul></div>
+        <div class="span-2 footer__col"><h4>Builds</h4><ul><li><a href="#builds">Side projects</a></li><li><a href="https://github.com/Lego514">GitHub</a></li></ul></div>
+        <div class="span-2 footer__col"><h4>Background</h4><ul><li><a href="#background">Education</a></li><li><a href="resume/Yi-Lei_Li_Resume_SWE.pdf">Résumé, software</a></li><li><a href="resume/Yi-Lei_Li_Resume_Data.pdf">Résumé, data</a></li><li><a href="https://www.linkedin.com/in/legoli/">LinkedIn</a></li></ul></div>
+      </div>
+      <div class="footer__legal">
+        <span>&copy; 2026 Yi-Lei Li</span>
+        <div class="socials"></div>
+        <span class="credits">Product names and logos are trademarks of their owners</span>
+      </div>
+    </div>
   </div>
 </footer>
 
+<script>
+// Shallow Sea: the loop plays only while its card is on screen, never under reduced motion; the button pauses it
+document.querySelectorAll('[data-sea]').forEach(panel => {
+  const video = panel.querySelector('video'), btn = panel.querySelector('.loop-pause');
+  const icons = { pause: btn.innerHTML, play: '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3l8 5-8 5z"/></svg>' };
+  let held = matchMedia('(prefers-reduced-motion: reduce)').matches, seen = false;
+  const show = () => {
+    btn.innerHTML = held ? icons.play : icons.pause;
+    btn.setAttribute('aria-label', held ? 'Play animation' : 'Pause animation');
+    btn.title = btn.getAttribute('aria-label');
+    btn.classList.toggle('is-paused', held);
+  };
+  const sync = () => { if (seen && !held) video.play().catch(() => {}); else video.pause(); };
+  new IntersectionObserver(es => { seen = es[0].isIntersecting; sync(); }, { rootMargin: '120px' }).observe(panel);
+  btn.addEventListener('click', () => { held = !held; show(); sync(); });
+  show();
+});
+</script>
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+<script type="module" src="assets/diagrams/mount.js"></script>
 </body>
 </html>
