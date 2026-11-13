@@ -325,6 +325,45 @@ main:focus { outline: none; }
   box-shadow: var(--shadow);
 }
 
+/* ---------- standing Lego (§4b): one block for every Lego that stands on a wood line.
+   The art is cropped to its visible width (--cl/--cr of the image width), pulled down by its
+   clear space under the feet (--clear of its height), blended into the band like the hero, and
+   given a contact shadow under the feet (--sl/--sw of the figure width). ---------- */
+.lego-stand {
+  --lego-h: 130px;
+  position: relative; flex: none;
+  height: var(--lego-h);
+  width: calc(var(--lego-h) * var(--ar) * (1 - var(--cl) - var(--cr)));
+}
+.lego-stand > img {
+  position: relative; z-index: 2;
+  height: 100%; width: auto; max-width: none;
+  margin-left: calc(var(--lego-h) * var(--ar) * var(--cl) * -1);
+  translate: 0 var(--clear);
+  mix-blend-mode: multiply;
+}
+.lego-stand--mirror > img { scale: -1 1; }
+.lego-stand::before {
+  content: ""; position: absolute; z-index: 0;
+  left: var(--sl); width: var(--sw); bottom: -6px; height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgb(90 55 20 / .30), rgb(90 55 20 / 0));
+}
+
+/* ---------- section header row: h2 left, Lego right, closed by a full-width wood line ---------- */
+.section-head {
+  position: relative;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: clamp(28px, 4vw, 48px);
+}
+.section-head::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; z-index: 1;
+  height: var(--wood-line); border-radius: var(--pill); background: var(--wood);
+}
+.section-head h2 { min-width: 0; padding-bottom: 28px; }
+.section-head__lego { margin-right: clamp(0px, 3vw, 48px); }
+@media (min-width: 600px) { .section-head__lego { --lego-h: 170px; } }
+@media (min-width: 900px) { .section-head__lego { --lego-h: 210px; } }
+
 /* ---------- projects ---------- */
 .projects { display: grid; gap: clamp(24px, 4vw, 40px); margin-top: clamp(32px, 5vw, 56px); }
 .project {
@@ -492,28 +531,21 @@ main:focus { outline: none; }
 }
 
 /* ---------- contact ---------- */
-.contact { display: grid; gap: 32px; align-items: center; }
+.contact { display: grid; row-gap: 32px; }
+@media (max-width: 899px) { .contact .contact__lego { margin-top: 8px; } .contact { row-gap: 0; } .contact__text { padding-bottom: 32px; } }
 .contact__text { display: flex; flex-direction: column; align-items: flex-start; }
 .contact__where { margin-top: 24px; color: var(--ink-2); }
 .contact__email { margin-top: 16px; font: 500 clamp(1.125rem, 2.2vw, 1.5rem)/1.3 var(--font-mono); overflow-wrap: anywhere; }
 .contact__email a { display: inline-block; padding: 6px 0; color: var(--fur-ink); text-decoration: underline; text-decoration-color: var(--wood); text-decoration-thickness: 2px; text-underline-offset: 6px; }
 .contact .actions { margin-top: 24px; }
-.contact__lego {
-  justify-self: center;
-  width: min(100%, 300px);
-  aspect-ratio: 4 / 5;
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--paper-2);
-  border: 1px solid var(--line);
-  box-shadow: var(--shadow);
-}
-.contact__lego > img { height: 100%; object-fit: cover; object-position: 50% 12%; }
+.contact__lego { --lego-h: 240px; justify-self: center; }
+.contact__floor { grid-area: auto; grid-column: 1 / -1; }
+@media (min-width: 600px) { .contact__lego { --lego-h: 300px; } }
 @media (min-width: 900px) {
-  .contact { grid-template-columns: minmax(0, 1fr) auto; gap: clamp(40px, 6vw, 96px); }
-  .contact__lego { width: 320px; }
+  .contact { grid-template-columns: minmax(0, 1fr) auto; column-gap: clamp(40px, 6vw, 96px); row-gap: 0; align-items: end; }
+  .contact__text { align-self: center; padding-bottom: 40px; }
+  .contact__lego { --lego-h: 360px; margin-right: clamp(0px, 4vw, 64px); }
 }
-@media (max-width: 599px) { .contact__lego { width: min(100%, 240px); } }
 
 /* ---------- footer ---------- */
 .site-footer { border-top: 1px solid var(--line); padding-block: 20px 28px; }
@@ -590,10 +622,12 @@ main:focus { outline: none; }
 
   <section class="section" id="projects" aria-labelledby="projects-title">
     <div class="wrap">
-      <h2 id="projects-title">Projects</h2>
-      <!-- Lego slot (§4): back view peeking over the section edge. Left out for now: at 1440×900 it would share the
-           viewport with the hero Lego while scrolling, which §4 does not allow.
-      <figure class="lego" data-lego="coding-back"><img src="img/lego/lego-coding-back.webp" width="666" height="667" alt="" loading="lazy" decoding="async"></figure> -->
+      <div class="section-head">
+        <h2 id="projects-title">Projects</h2>
+        <figure class="lego lego-stand section-head__lego" data-lego="basketball" style="--ar: 1.0525; --cl: 0.26; --cr: 0.13; --clear: 3.1%; --sl: 22%; --sw: 56%">
+          <img src="img/lego/lego-basketball-front.webp" width="702" height="667" loading="lazy" decoding="async" alt="Lego the corgi holding a basketball under one arm.">
+        </figure>
+      </div>
 
       <div class="projects">
         <article class="project" aria-labelledby="coach-title">
@@ -679,7 +713,12 @@ main:focus { outline: none; }
 
   <section class="section section--band" id="research" aria-labelledby="research-title">
     <div class="wrap">
-      <h2 id="research-title">Research</h2>
+      <div class="section-head">
+        <h2 id="research-title">Research</h2>
+        <figure class="lego lego-stand section-head__lego" data-lego="dive" style="--ar: 1.024; --cl: 0.29; --cr: 0.16; --clear: 2.4%; --sl: 12%; --sw: 79%">
+          <img src="img/lego/lego-dive-front.webp" width="683" height="667" loading="lazy" decoding="async" alt="Lego the corgi in a diving mask and fins, making an OK sign.">
+        </figure>
+      </div>
 
       <article class="study" aria-labelledby="quantlab-title">
         <div class="study__head">
@@ -734,7 +773,6 @@ main:focus { outline: none; }
         </table>
       </article>
 
-      <!-- Lego slot (§4): <figure class="lego" data-lego="dive">…</figure> — "going deep", art not made yet -->
 
       <article class="study study--split" aria-labelledby="credit-title">
         <div class="study__text">
@@ -749,8 +787,12 @@ main:focus { outline: none; }
 
   <section class="section" id="side" aria-labelledby="side-title">
     <div class="wrap">
-      <h2 id="side-title">Side projects</h2>
-      <!-- Lego slot (§4): <figure class="lego" data-lego="basketball">…</figure> — art not made yet -->
+      <div class="section-head">
+        <h2 id="side-title">Side projects</h2>
+        <figure class="lego lego-stand section-head__lego lego-stand--mirror" data-lego="surf" style="--ar: 1.2258; --cl: 0.09; --cr: 0.04; --clear: 8.4%; --sl: 8%; --sw: 88%">
+          <img src="img/lego/lego-surf-side.webp" width="798" height="651" loading="lazy" decoding="async" alt="Lego the corgi riding a surfboard.">
+        </figure>
+      </div>
       <div class="sides">
         <article class="side" aria-labelledby="dsa-title">
           <div class="side__media">
@@ -763,7 +805,6 @@ main:focus { outline: none; }
           </div>
         </article>
         <article class="side" aria-labelledby="sea-title">
-          <!-- Lego slot (§4): <figure class="lego" data-lego="surf">…</figure> — art not made yet -->
           <div class="side__media" data-sea>
             <video muted loop playsinline preload="none" width="800" height="500" poster="img/shallow-sea-still.webp" aria-label="Shallow Sea from above: dolphins, rays and fish swim over coral in clear blue water">
               <source src="img/shallow-sea-loop.mp4" type="video/mp4">
@@ -796,7 +837,6 @@ main:focus { outline: none; }
   <section class="section section--band" id="background" aria-labelledby="background-title">
     <div class="wrap">
       <h2 id="background-title">Background</h2>
-      <!-- Lego slot (§4): <figure class="lego" data-lego="photo">…</figure> — art not made yet -->
       <div class="background">
         <ol class="timeline">
           <li>
@@ -846,9 +886,10 @@ main:focus { outline: none; }
             <a class="btn btn--secondary" href="https://www.linkedin.com/in/legoli/">LinkedIn</a>
           </div>
         </div>
-        <figure class="lego contact__lego" data-lego="standing">
-          <img src="img/lego/lego-standing-front.webp" width="591" height="887" loading="lazy" decoding="async" alt="">
+        <figure class="lego lego-stand contact__lego" data-lego="photo" style="--ar: 1; --cl: 0.32; --cr: 0.2; --clear: 4.2%; --sl: 21%; --sw: 68%">
+          <img src="img/lego/lego-photo-front.webp" width="667" height="667" loading="lazy" decoding="async" alt="Lego the corgi pointing a camera at you.">
         </figure>
+        <div class="floor contact__floor" aria-hidden="true"></div>
       </div>
     </div>
   </section>
