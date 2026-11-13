@@ -47,7 +47,7 @@
   --pill: 999px;
   --shadow: 0 1px 0 #fff inset, 0 12px 30px -18px rgb(90 55 20 / .35);
   --wood-line: 3px;
-  --wrap: 1200px;
+  --wrap: 1280px;
   --gutter: clamp(16px, 4vw, 40px);
   --header-h: 64px;
   --focus: 3px solid var(--fur-deep);
@@ -213,7 +213,11 @@ main:focus { outline: none; }
   width: min(100%, 46vh, 420px);
   width: min(100%, 46svh, 420px);
 }
-.hero__lego > img { margin-bottom: -3.2%; position: relative; z-index: 1; transform-origin: 51% 97%; }
+.hero__lego > img {
+  margin-bottom: -3.2%; position: relative; z-index: 1; transform-origin: 51% 97%;
+  /* the art's soft edge is near-white; multiply drops it into the cream page */
+  mix-blend-mode: multiply;
+}
 .hero__lego::before,
 .hero__lego::after {
   content: ""; position: absolute; bottom: -6px; height: 12px;
@@ -222,6 +226,9 @@ main:focus { outline: none; }
 }
 .hero__lego::before { left: 11%; width: 30%; }   /* under the stool */
 .hero__lego::after  { left: 49%; width: 42%; }   /* under the desk */
+/* the shadows wait for the picture, so they never show alone */
+.js .hero__lego:not(.is-ready)::before,
+.js .hero__lego:not(.is-ready)::after { visibility: hidden; }
 
 .floor {
   grid-area: floor;
@@ -257,15 +264,15 @@ main:focus { outline: none; }
 
 @media (min-width: 900px) {
   .hero__grid {
-    grid-template-columns: minmax(0, 55fr) minmax(0, 45fr);
+    grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas: "copy lego" "floor floor" "proof proof";
-    column-gap: clamp(24px, 4vw, 64px);
+    column-gap: clamp(32px, 4.5vw, 64px);
   }
-  .hero__copy { align-self: center; padding: 0 0 40px; }
+  .hero__copy { align-self: center; padding: 0 0 56px; }
   .hero__lego {
     justify-self: end;
-    width: min(100%, 540px, calc(100vh - 330px));
-    width: min(100%, 540px, calc(100svh - 330px));
+    width: min(44vw, 620px, calc(100vh - 290px));
+    width: min(44vw, 620px, calc(100svh - 290px));
     min-width: 300px;
   }
   .proof { margin-top: 28px; }
@@ -348,7 +355,7 @@ main:focus { outline: none; }
       </div>
 
       <figure class="lego hero__lego" data-lego="coding">
-        <img src="img/lego/lego-coding-side.webp" width="666" height="667" fetchpriority="high" decoding="async"
+        <img src="img/lego/lego-coding-side.webp" width="666" height="667" fetchpriority="high" decoding="sync" onload="this.parentNode.classList.add('is-ready')"
              alt="Lego, a plush orange-and-cream corgi, sits on a wooden stool typing on a laptop at a small wooden desk.">
         <!-- later: <video muted loop playsinline preload="none" poster="img/lego/lego-coding-side.webp" data-src="img/lego/coding.webm"></video> -->
       </figure>
