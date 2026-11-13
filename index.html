@@ -308,6 +308,7 @@ main:focus { outline: none; }
 .section h3 { font-size: clamp(1.5rem, 2.4vw, 2rem); }
 
 /* text link with an arrow */
+.links { display: flex; flex-wrap: wrap; gap: .5rem 1.5rem; margin: 0; }
 .link {
   display: inline-flex; align-items: center; gap: .4em;
   min-height: 44px;
@@ -641,8 +642,8 @@ main:focus { outline: none; }
 
       <ul class="proof" aria-label="At a glance">
         <li><b>22,000+</b> postings read per run</li>
-        <li><b>300+</b> automated tests</li>
-        <li><b>3</b> live projects</li>
+        <li><b>350+</b> automated tests</li>
+        <li><b>4</b> projects you can open now</li>
       </ul>
     </div>
   </section>
@@ -661,13 +662,13 @@ main:focus { outline: none; }
         <article class="project" aria-labelledby="coach-title">
           <div class="project__text">
             <h3 id="coach-title">LeetCode Coach</h3>
-            <p>An interview-prep app that works offline. It plans each day’s practice, schedules reviews with the FSRS algorithm and scores spoken explanations with Claude. Changes save in the browser first, then sync to PostgreSQL.</p>
+            <p>An interview-prep app that works offline. It plans each day’s practice across 213 problems, schedules reviews with the FSRS algorithm, runs timed mock interviews and scores spoken explanations with Claude. Changes save in the browser first, then sync to PostgreSQL.</p>
             <dl class="facts">
               <div><dt>Stack</dt><dd>React, TypeScript, Hono</dd></div>
-              <div><dt>Tests</dt><dd>Unit, API and Playwright</dd></div>
+              <div><dt>Tests</dt><dd>Unit, API and Playwright on Chromium and iPhone WebKit</dd></div>
               <div><dt>Hosting</dt><dd>Render; wakes in a minute</dd></div>
             </dl>
-            <a class="link" href="https://leetcode-coach-f6q7.onrender.com">Open the live app<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a>
+            <p class="links"><a class="link" href="https://leetcode-coach-f6q7.onrender.com">Open the live app<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a> <a class="link" href="https://github.com/Lego514/leetcode-coach">Read the source<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a></p>
           </div>
           <div class="project__media project__media--pair">
             <img class="shot" src="img/coach-today-800.webp" srcset="img/coach-today-800.webp 800w, img/coach-today.webp 1760w" sizes="(min-width: 900px) 640px, 100vw" width="1760" height="1100" loading="lazy" decoding="async" alt="LeetCode Coach’s Today page: days until the interview, problems left, today’s goal and the current streak">
@@ -679,11 +680,10 @@ main:focus { outline: none; }
           <div class="project__text">
             <h3 id="banking-title">Banking Transactions API</h3>
             <p>A Spring Boot service on PostgreSQL. Transfers commit both legs or neither, a retried request pays once, and five SQL checks prove the ledger still adds up.</p>
-            <!-- TODO(ray): §5 gives no facts for this card; these three restate the description. Replace if you have better ones. -->
             <dl class="facts">
-              <div><dt>Stack</dt><dd>Spring Boot, PostgreSQL</dd></div>
-              <div><dt>Transfers</dt><dd>Both legs or neither</dd></div>
-              <div><dt>Ledger</dt><dd>Five SQL checks</dd></div>
+              <div><dt>Stack</dt><dd>Spring Boot 3, JPA, PostgreSQL</dd></div>
+              <div><dt>Locking</dt><dd>Row locks taken in account-id order, so opposite transfers cannot deadlock</dd></div>
+              <div><dt>Tests</dt><dd>48 in CI, 10 of them on real PostgreSQL</dd></div>
             </dl>
             <a class="link" href="https://github.com/Lego514/banking-transactions-api">Read the source<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a>
           </div>
@@ -699,13 +699,13 @@ main:focus { outline: none; }
             <dl class="facts">
               <div><dt>Health</dt><dd>p95 latency per source</dd></div>
               <div><dt>Screening</dt><dd>Fails closed without credit</dd></div>
-              <div><dt>Tests</dt><dd>300+ in Vitest</dd></div>
+              <div><dt>Tests</dt><dd>308 in Vitest</dd></div>
             </dl>
             <a class="link" href="https://github.com/Lego514/job-opening-monitor">Read the source<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a>
           </div>
           <div class="project__media project__media--flow">
             <svg class="flow" viewBox="0 0 420 352" role="img" aria-labelledby="flow-title">
-              <title id="flow-title">More than 110 career sites, over 22,000 postings a run, feed one dedupe step, which sends new matches to Telegram and email and fills a queue of five a day.</title>
+              <title id="flow-title">111 career sources, over 22,000 postings a run, feed one dedupe step, which sends new matches to Telegram and email and fills a queue of five a day.</title>
               <defs>
                 <marker id="flow-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
                   <path d="M1 1 9 5 1 9" fill="none" stroke="#6B5D52" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
@@ -718,7 +718,7 @@ main:focus { outline: none; }
                 <path d="M210 194 C210 228 350 222 350 258"/>
               </g>
               <rect class="flow__box" x="50" y="8" width="320" height="74" rx="16"/>
-              <text class="flow__label" x="210" y="40" text-anchor="middle">110+ career sites</text>
+              <text class="flow__label" x="210" y="40" text-anchor="middle">111 career sources</text>
               <text class="flow__meta" x="210" y="65" text-anchor="middle">22,000+ postings a run</text>
               <rect class="flow__box flow__box--core" x="110" y="128" width="200" height="66" rx="16"/>
               <text class="flow__label flow__label--core" x="210" y="157" text-anchor="middle">Dedupe</text>
@@ -753,8 +753,8 @@ main:focus { outline: none; }
         <div class="study__head">
           <div class="study__text">
             <h3 id="quantlab-title">QuantLab and the strategies it rejected</h3>
-            <p>Strategies are scored only on data their parameters never saw. The kept one went from Sharpe 1.29 to 1.08 after new data, three bug fixes and next-open fills.</p>
-            <a class="link" href="https://github.com/Lego514/quantlab/blob/main/STRATEGY_2026.md#second-restatement-2026-10-28">Read the corrections<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a>
+            <p>Strategies are scored only on data their parameters never saw. The kept one went from Sharpe 1.29 to 1.08 after new data, three bug fixes and next-open fills; its 95% interval is 0.34 to 1.78. Since 29 October 2026 the frozen rules trade forward every day in a public ledger.</p>
+            <p class="links"><a class="link" href="https://github.com/Lego514/quantlab/blob/main/STRATEGY_2026.md#second-restatement-2026-10-28">Read the corrections<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a> <a class="link" href="https://github.com/Lego514/quantlab/tree/main/forward">See the forward ledger<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a></p>
           </div>
           <figure class="chart">
             <div class="chart__plot" role="img" aria-label="Walk-forward out-of-sample equity from 2018 to 2026: the kept portfolio grows from 1.0x to about 2.4x.">
@@ -830,8 +830,8 @@ main:focus { outline: none; }
           </div>
           <div class="side__text">
             <h3 id="dsa-title">DSA Whiteboard</h3>
-            <p>Traces algorithms by hand: arrays with pointers, trees, heaps and DP tables, with step playback and live co-editing.</p>
-            <a class="link" href="https://lego514.github.io/dsa-whiteboard/">Open the whiteboard<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a>
+            <p>Traces algorithms by hand: arrays with pointers, trees, graphs, heaps and DP tables, with step playback and live co-editing. Published on npm; rooms run on Cloudflare Durable Objects.</p>
+            <p class="links"><a class="link" href="https://lego514.github.io/dsa-whiteboard/">Open the whiteboard<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a> <a class="link" href="https://github.com/Lego514/dsa-whiteboard">Read the source<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5"/></svg></a></p>
           </div>
         </article>
         <article class="side" aria-labelledby="sea-title">
