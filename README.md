@@ -1,13 +1,19 @@
 # Lego514.github.io
 
-Personal site for Yi-Lei (Ray) Li — https://lego514.github.io
+Personal site for Yi-Lei (Ray) Li, a backend and full-stack software engineer —
+https://lego514.github.io
+
+The page has three content sections after the hero: **Projects** (LeetCode Coach, DSA
+Whiteboard, Banking Transactions API, Job-Opening Monitor), **More work** (QuantLab, Credit Card
+Default Risk, Shallow Sea, RoomFlow, with QuantLab's strategy verdicts in a closed `<details>`)
+and **Background**, followed by Contact.
 
 One static page, hosted by GitHub Pages from the repo root. No build step, no framework, no npm:
 `index.html` holds the HTML, the CSS and a small vanilla script. The only external request is
 Google Fonts (Fraunces, Inter, JetBrains Mono). Edit the file and push; there is nothing to compile.
 
 The page is hosted by **Lego**, a plush corgi who does what Ray does: codes in
-the hero, plays basketball over Projects, dives over Research, surfs over Side projects and takes
+the hero, plays basketball over Projects, surfs over More work, dives over Background and takes
 the photo in Contact. The look is warm and light: cream paper, Lego orange and a thin wood line
 that every Lego stands on.
 
