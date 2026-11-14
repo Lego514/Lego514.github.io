@@ -428,6 +428,11 @@ main:focus { outline: none; }
   .project--flip .project__text { order: 2; }
   .project--flip .project__media { order: 1; }
 }
+/* the DSA Whiteboard demo is a video with small text in it: from 1100px give it the wider column
+   (below that the text column needs its width for the two links) */
+@media (min-width: 1100px) {
+  .project--wide-media { grid-template-columns: minmax(0, 11fr) minmax(0, 9fr); }
+}
 
 /* ---------- more work: one grid of four equal compact cards ---------- */
 .more-grid { display: grid; gap: 24px; margin-top: clamp(32px, 5vw, 56px); }
@@ -693,7 +698,7 @@ main:focus { outline: none; }
           </div>
         </article>
 
-        <article class="project project--flip" aria-labelledby="dsa-title">
+        <article class="project project--flip project--wide-media" aria-labelledby="dsa-title">
           <div class="project__text">
             <h3 id="dsa-title">DSA Whiteboard</h3>
             <p>A whiteboard for tracing algorithms by hand: arrays with pointers, trees, graphs, heaps and DP tables, with step playback and live co-editing. It started inside LeetCode Coach and became its own open-source package.</p>
