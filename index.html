@@ -327,6 +327,9 @@ main:focus { outline: none; }
   background: var(--paper);
   box-shadow: var(--shadow);
 }
+.shot--loop { position: relative; overflow: hidden; aspect-ratio: 16 / 10; }
+.shot--loop > video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.shot--loop .loop-toggle { box-shadow: 0 0 0 1px var(--line); }
 
 /* ---------- standing Lego (§4b): one block for every Lego that stands on a wood line.
    The art is cropped to its visible width (--cl/--cr of the image width), pulled down by its
@@ -703,7 +706,15 @@ main:focus { outline: none; }
             <p class="project__note">No sign-up needed.</p>
           </div>
           <div class="project__media">
-            <img class="shot" src="img/whiteboard-dark-800.webp" srcset="img/whiteboard-dark-800.webp 800w, img/whiteboard-dark.webp 1280w" sizes="(min-width: 900px) 640px, 100vw" width="1280" height="800" loading="lazy" decoding="async" alt="DSA Whiteboard with a binary tree, a node pointer and a stack">
+            <div class="shot shot--loop" data-sea>
+              <video muted loop playsinline preload="none" width="1280" height="800" poster="img/dsa-whiteboard-coedit-poster.webp" aria-label="Two people edit one DSA Whiteboard board: Alice drags a binary tree and Bob sees it move, then Bob changes a node from 6 to 7 and Alice sees the new value">
+                <source src="img/dsa-whiteboard-coedit.mp4" type="video/mp4">
+              </video>
+              <button class="loop-toggle" type="button" aria-label="Pause animation" data-paused="false">
+                <svg class="loop-toggle__pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 3h2.5v10H4.5zM9 3h2.5v10H9z"/></svg>
+                <svg class="loop-toggle__play" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 3l8 5-8 5z"/></svg>
+              </button>
+            </div>
           </div>
         </article>
 
