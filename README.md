@@ -1,7 +1,7 @@
 # Lego514.github.io
 
 Personal site for Yi-Lei (Ray) Li, a backend and full-stack software engineer —
-https://lego514.github.io
+https://legoli.dev
 
 The page has three content sections after the hero: **Projects** (LeetCode Coach, DSA
 Whiteboard, Banking Transactions API, Job-Opening Monitor), **More work** (QuantLab, Credit Card
